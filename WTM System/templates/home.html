@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Water Monitoring System Dashboard</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>TLS - Ultimate RPI Server</h1>
+      <hr />
+      <div class="row">
+        <div class="col-sm-4">
+          <h3>Discord Bot:</h3>
+          <p>Current Status: <span id="status"></span></p>
+          <button class="btn btn-success" onclick="startMonitoring()">
+            Start
+          </button>
+          <button class="btn btn-danger" onclick="stopMonitoring()">
+            Stop
+          </button>
+        </div>
+      </div>
+    </div>
+	<script>
+
+ $(document).ready(function () {
+        $.ajax({
+          url: "/status",
+          type: "GET",
+          success: function (response) {
+            $("#status").text(response);
+          },
+          error: function (error) {
+            console.log(error);
+          },
+        });
+      });
+		function startMonitoring() {
+			fetch("/start")
+				.then(response => response.text())
+				.then(data => {
+					document.getElementById("status").innerHTML = data;
+				})
+				.catch(error => {
+					console.error('Error:', error);
+				});
+		}
+
+		function stopMonitoring() {
+			fetch("/stop")
+				.then(response => response.text())
+				.then(data => {
+					document.getElementById("status").innerHTML = data;
+				})
+				.catch(error => {
+					console.error('Error:', error);
+				});
+		}
+	</script>
+</body>
+</html>
