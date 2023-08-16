@@ -130,7 +130,7 @@ include_once 'functions/header.php';
                             <div class="row align-items-center no-gutters">
                                 <div class="col me-2">
                                     <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>WATER LEVEL</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2">0%</span></div>
+                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 water-level">0%</span></div>
                                 </div>
                                 <div class="col-auto"><i class="fas fa-chart-pie fa-2x text-gray-300"></i></div>
                             </div>
@@ -143,7 +143,7 @@ include_once 'functions/header.php';
                             <div class="row align-items-center no-gutters">
                                 <div class="col me-2">
                                     <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>TODAY Liters</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2">0L</span></div>
+                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 water-liters">0L</span></div>
                                 </div>
                                 <div class="col-auto"><i class="fas fa-level-down-alt fa-2x text-gray-300"></i></div>
                             </div>
@@ -155,8 +155,8 @@ include_once 'functions/header.php';
                         <div class="card-body">
                             <div class="row align-items-center no-gutters">
                                 <div class="col me-2">
-                                    <div class="text-uppercase text-danger fw-bold text-xs mb-1"><span>today WATER ALERTS</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2">0</span></div>
+                                    <div class="text-uppercase text-danger fw-bold text-xs mb-1"><span>Sensor Status</span></div>
+                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 sensor-status">0</span></div>
                                 </div>
                                 <div class="col-auto"><i class="fas fa-cogs fa-2x text-gray-300"></i></div>
                             </div>
@@ -200,7 +200,7 @@ include_once 'functions/header.php';
                 <div class="col-lg-6 col-xl-6">
                     <div class="card shadow mb-4">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h6 class="text-primary fw-bold m-0">Most Used Tank</h6>
+                            <h6 class="text-primary fw-bold m-0">Used Tank</h6>
                             <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
                                 <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
                                     <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item" href="#">&nbsp;Another action</a>

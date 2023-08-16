@@ -95,15 +95,22 @@ $(document).ready(function() {
         $(".ampm").html(ampm.toUpperCase());
         },1000);
 
+        setInterval( function() {
+            $.ajax({
+                url: 'functions/water-stats.php',  // Replace with your actual endpoint
+                dataType: 'json',
+                success: function(data) {
+                    $('.water-level').html(data['level']+"%");
+                    $('.water-liters').html(data['liters']+"L");
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+            },1000);
+        
+        
 
-    function formatBytes(bytes) {
-        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-        if (bytes === 0) return '0 Byte';
-        const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-        return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
-    }
-
-    if (currentPath.includes("/WTMS/settings.php")) {
         setInterval(function() {
             fetch('http://192.168.8.192:5000/check_sensor')
                 .then(response => response.json()) 
@@ -112,11 +119,19 @@ $(document).ready(function() {
                     if(data.status == "Running"){
                         $(".restart-btn").html("Stop");
                     }
-                   
+                    
                 })
                 .catch(error => console.error('Error:', error));
-        }, 3000);
-        
+        }, 1000);
+
+    function formatBytes(bytes) {
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        if (bytes === 0) return '0 Byte';
+        const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+        return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+    }
+    
+    if (currentPath.includes("/WTMS/settings.php")) {
             setInterval(function() {
                 fetch('http://192.168.8.192:5000/get_system_stats')
                     .then(response => response.json())

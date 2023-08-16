@@ -17,9 +17,6 @@ def start_sensor():
     global process_sensor
     if process_sensor is None or process_sensor.poll() is not None:
         process_sensor = subprocess.Popen(['python', f'{current_path}/sensor.py'])
-        return jsonify(message='Sensor process started')
-    else:
-        return jsonify(message='Sensor process is already running')
 
 @app.route('/kill_sensor', methods=['POST', 'GET'])
 def kill_sensor():
