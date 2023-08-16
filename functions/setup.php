@@ -25,6 +25,23 @@
             )
         ");
 
+        $db->exec("
+            CREATE TABLE IF NOT EXISTS settings (
+              id INT PRIMARY KEY AUTO_INCREMENT,
+              high_threshold INT,
+              low_threshold INT
+            )
+        ");
+        
+        $db->exec("
+          CREATE TABLE IF NOT EXISTS logs (
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            logs TEXT,
+            type TEXT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+        ");
+
         $db->beginTransaction();
 
         $stmt = $db->prepare("SELECT COUNT(*) FROM `users` WHERE `username` = 'admin'");

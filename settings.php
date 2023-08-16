@@ -1,3 +1,7 @@
+<?php
+include_once 'functions/authentication.php';
+include_once 'functions/header.php';
+?>
 <!DOCTYPE html>
 <html data-bs-theme="light" id="bg-animation" lang="en">
 
@@ -98,34 +102,14 @@
 </head>
 
 <body id="page-top">
-    <nav class="navbar navbar-expand-lg border rounded shadow mb-4 navbar-light">
-        <div class="container-fluid"><img src="assets/img/reservoir.png" width="45em"><a class="navbar-brand d-flex align-items-center" href="/"><span>&nbsp;RMMFB</span></a><button data-bs-toggle="collapse" data-bs-target="#navcol-1" class="navbar-toggler"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <div class="theme-switcher dropdown"><a class="dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-sun-fill mb-1">
-                            <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
-                        </svg></a>
-                    <div class="dropdown-menu"><a class="dropdown-item d-flex align-items-center" href="#" data-bs-theme-value="light"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-sun-fill opacity-50 me-2">
-                                <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
-                            </svg>Light</a><a class="dropdown-item d-flex align-items-center" href="#" data-bs-theme-value="dark"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-moon-stars-fill opacity-50 me-2">
-                                <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path>
-                                <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
-                            </svg>Dark</a><a class="dropdown-item d-flex align-items-center" href="#" data-bs-theme-value="auto"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-circle-half opacity-50 me-2">
-                                <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
-                            </svg>Auto</a></div>
-                </div>
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link link-primary" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-original-title="Here you can see your Dashboard." data-bs-placement="bottom" href="index.php" style="color:#393939;" title="Here you can see your Dashboard."> <i class="fas fa-home"></i>&nbsp;Home</a></li>
-                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-original-title="Here you can see your Sales &amp; Transactions." data-bs-placement="bottom" style="color:#393939;" title="Here you can see your water data. (Water Level)" href="water-data.php"><i class="fas fa-chart-pie"></i>&nbsp;Water Data</a></li>
-                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-original-title="Here you can Monitor the rental transactions." data-bs-placement="bottom" style="color:#393939;" title="Here you can maange you water tank to use." href="tank-management.php"><i class="fas fa-cog"></i>&nbsp;Manage Tank</a></li>
-                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-original-title="Here you can manage your account." data-bs-placement="bottom" style="color:#393939;" title="Here you can configure your water sensor." href="settings.php"><i class="fas fa-cogs"></i>&nbsp;Settings</a></li>
-                </ul><a class="btn btn-light shadow" role="button" data-bs-original-title="Here you can logout your acccount." data-bs-placement="left" data-bs-toggle="tooltip" data-bss-tooltip="" href="login.php">logout</a>
-            </div>
-        </div>
-    </nav>
+    <?php
+        nav();
+    ?>
     <div id="content">
         <div class="container-fluid">
             <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                <h3 class="text-dark mb-0">Settings</h3><button class="btn btn-primary btn-sm float-end d-sm-inline-block" data-bs-toggle="modal" data-bss-tooltip="" data-bs-placement="left" type="button" data-bs-target="#change" title="Here you can change your account password."><i class="fas fa-user-check fa-sm text-white-50"></i>&nbsp;Change Password</button>
+                <h3 class="text-dark mb-0">Settings</h3>
+                <button class="btn btn-primary btn-sm float-end d-sm-inline-block" data-bs-toggle="modal" data-bss-tooltip="" data-bs-placement="left" type="button" data-bs-target="#change" title="Here you can change your account password."><i class="fas fa-user-check fa-sm text-white-50"></i>&nbsp;Change Password</button>
             </div>
             <div class="row">
                 <div class="col-md-6 col-xl-3 mb-4">
@@ -146,8 +130,8 @@
                         <div class="card-body">
                             <div class="row align-items-center no-gutters">
                                 <div class="col me-2">
-                                    <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>ALERT HIGH (CM)</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 rangehigh">100</span></div>
+                                    <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>ALERT HIGH (%)</span></div>
+                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 rangehigh">100</span><span class="fs-2">%</span></div>
                                 </div>
                                 <div class="col-auto"><i class="fas fa-level-up-alt fa-2x text-gray-300"></i></div>
                             </div>
@@ -159,8 +143,8 @@
                         <div class="card-body">
                             <div class="row align-items-center no-gutters">
                                 <div class="col me-2">
-                                    <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>ALERT LOW (CM)</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 rangelow">10</span></div>
+                                    <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>ALERT LOW (%)</span></div>
+                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 rangelow">10</span><span class="fs-2">%</span></div>
                                 </div>
                                 <div class="col-auto"><i class="fas fa-level-down-alt fa-2x text-gray-300"></i></div>
                             </div>
@@ -189,8 +173,8 @@
                         </div>
                         <div class="card-body">
                             <form class="text-primary" method="post">
-                                <div class="my-1 mb-4"><label class="form-label">Water level high threshold (cm)</label><input class="form-range" type="range" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can adjust the water level alert threshold" name="high" onchange="rangehigh(this.value)" value="100"></div>
-                                <div class="my-1 mb-4"><label class="form-label">Water level low threshold (cm)</label><input class="form-range" type="range" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can adjust the water level alert threshold" name="low" onchange="rangelow(this.value)" value="10"></div>
+                                <div class="my-1 mb-4"><label class="form-label">Water level high threshold (%)</label><input class="form-range" type="range" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can adjust the water level alert threshold" name="high" onchange="rangehigh(this.value)" value="100"></div>
+                                <div class="my-1 mb-4"><label class="form-label">Water level low threshold (%)</label><input class="form-range" type="range" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can adjust the water level alert threshold" name="low" onchange="rangelow(this.value)" value="10"></div>
                                 <div class="text-center my-1"><button class="btn btn-primary" type="submit">Save</button></div>
                             </form>
                         </div>
@@ -203,41 +187,27 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>CPU</th>
-                                            <th>STORAGE</th>
-                                            <th>RAM</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>10%</td>
-                                            <td>8GB</td>
-                                            <td>2048</td>
-                                        </tr>
-                                        <tr></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <p class="text-primary m-0 fw-bold">Server Performance</p>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Response</th>
-                                            <th>IP Address</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>10%</td>
-                                            <td>127.0.0.1:5000</td>
-                                        </tr>
-                                        <tr></tr>
-                                    </tbody>
-                                </table>
+                            <table class="table system-stats">
+                                <thead>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>CPU</td>
+                                        <td class="cpu-percent"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Disk</td>
+                                        <td class="disk-percent"></td>
+                                        <td class="disk-usage"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Memory</td>
+                                        <td class="memory-percent"></td>
+                                        <td class="memory-usage"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             </div>
                         </div>
                     </div>
@@ -259,11 +229,15 @@
                             <p class="text-primary m-0 fw-bold">Sensor Status</p>
                         </div>
                         <div class="card-body">
-                            <div class="my-1"><label class="form-label">Ultrasonic Sensor (<span style="color: rgb(78, 223, 119);">Running</span>)</label></div>
+                            <div class="my-1"><label class="form-label">Ultrasonic Sensor (<span class="sensor-status">Waiting. . .</span>)</label></div>
                             <div class="text-center my-1"><button class="btn btn-danger" type="button" data-bs-target="#sensor" data-bs-toggle="modal">Restart</button></div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                <h3 class="text-dark mb-0">User Activity Logs</h3>
+                <a class="btn btn-warning btn-sm float-end d-sm-inline-block" href="/phpmyadmin"><i class="fas fa-user-check fa-sm text-white-50"></i>&nbsp;phpMyAdmin</a>
             </div>
             <div class="card shadow my-5">
                 <div class="card-header py-3">

@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (isset($_SESSION['username'])){
+    header('Location: ./index.php');
+}
+?>
 <!DOCTYPE html>
 <html data-bs-theme="light" id="bg-animation" lang="en">
 
@@ -57,10 +63,10 @@
                 <div class="row">
                     <div class="col text-center"><img class="rounded-circle w-80 shadow mb-4" src="assets/img/water-filter.png" width="100em"></div>
                 </div>
-                <form method="post" data-bs-theme="light">
+                <form action="functions/login.php" method="post" data-bs-theme="light">
                     <div class="mb-3"><input class="form-control shadow" type="text" name="username" placeholder="Username"></div>
                     <div class="mb-3"><input class="shadow form-control" type="password" name="password" placeholder="Password"></div>
-                    <div class="text-center mb-5"><a class="btn btn-primary shadow" role="button" href="index.php" style="width: 100%;">Log in</a></div>
+                    <div class="text-center mb-5"><button class="btn btn-primary shadow" type="submit">Log in</button></div>
                 </form>
             </div>
         </div>
