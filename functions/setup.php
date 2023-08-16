@@ -26,6 +26,27 @@
         ");
 
         $db->exec("
+            CREATE TABLE IF NOT EXISTS water_data (
+              id INT PRIMARY KEY AUTO_INCREMENT,
+              distance DOUBLE,
+              level DOUBLE,
+              liters DOUBLE,
+              created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+        ");
+
+        $db->exec("
+            CREATE TABLE IF NOT EXISTS water_tank (
+              id INT PRIMARY KEY AUTO_INCREMENT,
+              name VARCHAR(255),
+              height DOUBLE,
+              liters DOUBLE,
+              status VARCHAR(255),
+              created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+        ");
+
+        $db->exec("
             CREATE TABLE IF NOT EXISTS settings (
               id INT PRIMARY KEY AUTO_INCREMENT,
               high_threshold INT,
@@ -52,6 +73,11 @@
             $stmt = $db->prepare("INSERT INTO `users` (`username`, `password`) VALUES (:username, :password)");
             $stmt->bindValue(':username', 'admin');
             $stmt->bindValue(':password', '$2y$10$WgL2d2fzi6IiGiTfXvdBluTLlMroU8zBtIcRut7SzOB6j9i/LbA4K');
+            $stmt->execute();
+
+            $stmt = $db->prepare("INSERT INTO `settings` (`high_threshold`, `low_threshold`) VALUES (:high, :low)");
+            $stmt->bindValue(':high', 0);
+            $stmt->bindValue(':low', 0);
             $stmt->execute();
         }
         

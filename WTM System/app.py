@@ -6,6 +6,7 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 CORS(app)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 process_sensor = None
 process_sensor_data = None
 
@@ -33,7 +34,8 @@ def kill_sensor():
 def restart_process():
     kill_sensor()
     start_sensor()
-    return jsonify(message='Process restarted')
+    # redirect to 127.0.0.1/WTMS/settings.php
+    return jsonify(message='Sensor process restarted')
 
 @app.route('/check_sensor', methods=['GET'])
 def check_process_sensor():
@@ -61,7 +63,7 @@ def get_system_stats():
     
 @app.route('/')
 def home():
-    return 'Hello World!'
+    return 'HASH\'J Programming - WTMS | IoT-Base Water Tank Monitoring System'
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

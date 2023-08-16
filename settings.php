@@ -1,6 +1,7 @@
 <?php
 include_once 'functions/authentication.php';
 include_once 'functions/header.php';
+include_once 'functions/get-data.php';
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" id="bg-animation" lang="en">
@@ -130,8 +131,8 @@ include_once 'functions/header.php';
                         <div class="card-body">
                             <div class="row align-items-center no-gutters">
                                 <div class="col me-2">
-                                    <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>ALERT HIGH (%)</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 rangehigh">100</span><span class="fs-2">%</span></div>
+                                    <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>ALERT HIGH (cm)</span></div>
+                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 rangehigh"><?php echo settings_data()['high_threshold']?></span><span class="fs-2">cm</span></div>
                                 </div>
                                 <div class="col-auto"><i class="fas fa-level-up-alt fa-2x text-gray-300"></i></div>
                             </div>
@@ -143,8 +144,8 @@ include_once 'functions/header.php';
                         <div class="card-body">
                             <div class="row align-items-center no-gutters">
                                 <div class="col me-2">
-                                    <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>ALERT LOW (%)</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 rangelow">10</span><span class="fs-2">%</span></div>
+                                    <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>ALERT LOW (cm)</span></div>
+                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 rangelow"><?php echo settings_data()['low_threshold']?></span><span class="fs-2">cm</span></div>
                                 </div>
                                 <div class="col-auto"><i class="fas fa-level-down-alt fa-2x text-gray-300"></i></div>
                             </div>
@@ -172,9 +173,9 @@ include_once 'functions/header.php';
                             <p class="text-primary m-0 fw-bold">Alert Settings</p>
                         </div>
                         <div class="card-body">
-                            <form class="text-primary" method="post">
-                                <div class="my-1 mb-4"><label class="form-label">Water level high threshold (%)</label><input class="form-range" type="range" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can adjust the water level alert threshold" name="high" onchange="rangehigh(this.value)" value="100"></div>
-                                <div class="my-1 mb-4"><label class="form-label">Water level low threshold (%)</label><input class="form-range" type="range" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can adjust the water level alert threshold" name="low" onchange="rangelow(this.value)" value="10"></div>
+                            <form class="text-primary" method="post" action="functions/save_settings.php">
+                                <div class="my-1 mb-4"><label class="form-label">Water level high threshold (cm)</label><input class="form-range" type="range" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can adjust the water level alert threshold" name="high" onchange="rangehigh(this.value)" value="<?php echo settings_data()['high_threshold']?>" min="<?php echo settings_data()['low_threshold']?>" max="<?php echo max_distance()['height']?>"></div>
+                                <div class="my-1 mb-4"><label class="form-label">Water level low threshold (cm)</label><input class="form-range" type="range" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can adjust the water level alert threshold" name="low" onchange="rangelow(this.value)" value="<?php echo settings_data()['low_threshold']?>"></div>
                                 <div class="text-center my-1"><button class="btn btn-primary" type="submit">Save</button></div>
                             </form>
                         </div>
@@ -230,7 +231,7 @@ include_once 'functions/header.php';
                         </div>
                         <div class="card-body">
                             <div class="my-1"><label class="form-label">Ultrasonic Sensor (<span class="sensor-status">Waiting. . .</span>)</label></div>
-                            <div class="text-center my-1"><button class="btn btn-danger" type="button" data-bs-target="#sensor" data-bs-toggle="modal">Restart</button></div>
+                            <div class="text-center my-1"><button class="btn btn-danger restart-btn" type="button" data-bs-target="#sensor" data-bs-toggle="modal">Restart</button></div>
                         </div>
                     </div>
                 </div>
@@ -300,9 +301,9 @@ include_once 'functions/header.php';
                     <h4 class="modal-title">Sensor Restart</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to restart the system sensor?</p>
+                    <p>Are you sure you want to interrupt the system sensor?</p>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Restart</button></div>
+                <div id="restart" class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger restart-btn" type="button">Restart</button></div>
             </div>
         </div>
     </div>

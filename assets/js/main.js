@@ -7,7 +7,7 @@ function rangelow(data) {
 }
 
 $(document).ready(function() {
-
+        const currentPath = window.location.pathname;
         const urlParams = new URLSearchParams(window.location.search);
         const type = urlParams.get('type');
         const message = urlParams.get('message');
@@ -63,7 +63,6 @@ $(document).ready(function() {
         zoom: 0.60
       })  
 
-        
         if (type == 'success') {
             Swal.fire(
                 'Success!',
@@ -78,51 +77,72 @@ $(document).ready(function() {
               )
         }
     
-    setInterval( function() {
-    var hours = new Date().getHours();
-    $(".hours").html(( hours < 10 ? "0" : "" ) + hours);
-    }, 1000);
+        setInterval( function() {
+        var hours = new Date().getHours();
+        $(".hours").html(( hours < 10 ? "0" : "" ) + hours);
+        }, 1000);
+    
+        setInterval( function() {
+        var minutes = new Date().getMinutes();
+        $(".min").html(( minutes < 10 ? "0" : "" ) + minutes);
+        },1000);
+    
+        setInterval( function() {
+        var seconds = new Date().getSeconds();
+        $(".sec").html(( seconds < 10 ? "0" : "" ) + seconds);
+    
+        var ampm = new Date().getHours() >= 12 ? 'pm' : 'am';
+        $(".ampm").html(ampm.toUpperCase());
+        },1000);
 
-    setInterval( function() {
-    var minutes = new Date().getMinutes();
-    $(".min").html(( minutes < 10 ? "0" : "" ) + minutes);
-    },1000);
-
-    setInterval( function() {
-    var seconds = new Date().getSeconds();
-    $(".sec").html(( seconds < 10 ? "0" : "" ) + seconds);
-
-    var ampm = new Date().getHours() >= 12 ? 'pm' : 'am';
-    $(".ampm").html(ampm.toUpperCase());
-    },1000);
-
-    setInterval(function() {
-        fetch('http://127.0.0.1:5000/check_sensor')
-            .then(response => response.json()) 
-            .then(data => {
-                $(".sensor-status").html(data.status);
-            })
-            .catch(error => console.error('Error:', error));
-    }, 3000);
-
-    setInterval(function() {
-        fetch('http://127.0.0.1:5000/get_system_stats')
-            .then(response => response.json())
-            .then(data => {
-                $(".cpu-percent").html(data.cpu_percent + "%");
-                $(".disk-percent").html(data.disk_percent + "%");
-                $(".disk-usage").html(formatBytes(data.disk_used) + " / " + formatBytes(data.disk_total));
-                $(".memory-percent").html(data.memory_percent + "%");
-                $(".memory-usage").html(formatBytes(data.memory_used) + " / " + formatBytes(data.memory_total));
-            })
-            .catch(error => console.error('Error:', error));
-    }, 1000);
 
     function formatBytes(bytes) {
         const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
         if (bytes === 0) return '0 Byte';
         const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
         return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+    }
+
+    if (currentPath.includes("/WTMS/settings.php")) {
+        setInterval(function() {
+            fetch('http://192.168.8.192:5000/check_sensor')
+                .then(response => response.json()) 
+                .then(data => {
+                    $(".sensor-status").html(data.status);
+                    if(data.status == "Running"){
+                        $(".restart-btn").html("Stop");
+                    }
+                   
+                })
+                .catch(error => console.error('Error:', error));
+        }, 3000);
+        
+            setInterval(function() {
+                fetch('http://192.168.8.192:5000/get_system_stats')
+                    .then(response => response.json())
+                    .then(data => {
+                        $(".cpu-percent").html(data.cpu_percent + "%");
+                        $(".disk-percent").html(data.disk_percent + "%");
+                        $(".disk-usage").html(formatBytes(data.disk_used) + " / " + formatBytes(data.disk_total));
+                        $(".memory-percent").html(data.memory_percent + "%");
+                        $(".memory-usage").html(formatBytes(data.memory_used) + " / " + formatBytes(data.memory_total));
+                    })
+                    .catch(error => console.error('Error:', error));
+            }, 1000);
+        
+            document.getElementById('restart').addEventListener('click', function() {
+                // Perform the fetch request to the Flask API
+                fetch('http://192.168.8.192:5000/restart_sensor')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Display a message if needed
+                        console.log(data.message);
+                        // Perform the redirect
+                        window.location.href = 'settings.php?type=success&message=System Sensor Restarted successfully!';
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+            
     }
 
 } );
