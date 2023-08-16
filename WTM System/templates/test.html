@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My App</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.js"></script>
+  </head>
+  <body>
+    <h1>My App</h1>
+
+    <!-- Add a container for displaying the water level data -->
+    <div id="water-level-container">
+      <p>Loading...</p>
+    </div>
+
+    <script>
+      const socket = io.connect("/");
+      
+      function updateWaterLevel(data) {
+        const container = document.querySelector("#water-level-container");
+        container.innerHTML = `
+        <p>Water level: ${data.percentage}%</p>
+        <p>Water volume: ${data.liters} liters</p>
+        <p>Water distance: ${data.distance_cm} liters</p>
+        
+  `;
+      }
+    socket.on("sensor-data", (data) => {
+        console.log(data.water_level);
+        updateWaterLevel(data);
+      });
+    </script>
+  </body>
+</html>

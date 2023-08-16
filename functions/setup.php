@@ -32,7 +32,7 @@
         $userExists = $stmt->fetchColumn();
         
         if (!$userExists) {
-            $stmt = $db->prepare("INSERT INTO `users` (`username`, `password`, `level`) VALUES (:username, :password)");
+            $stmt = $db->prepare("INSERT INTO `users` (`username`, `password`) VALUES (:username, :password)");
             $stmt->bindValue(':username', 'admin');
             $stmt->bindValue(':password', '$2y$10$WgL2d2fzi6IiGiTfXvdBluTLlMroU8zBtIcRut7SzOB6j9i/LbA4K');
             $stmt->execute();

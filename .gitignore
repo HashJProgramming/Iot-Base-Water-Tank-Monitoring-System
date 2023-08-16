@@ -1,4 +1,5 @@
-/WTM System/__pycache__/
-/WTM System/.vscode/
-/WTM System/venv/
-/phpmyadmin
+.vscode
+WTM System/.vscode
+WTM System/__pycache__
+WTM System/venv
+WTMS.WTMS-System.code-workspace
