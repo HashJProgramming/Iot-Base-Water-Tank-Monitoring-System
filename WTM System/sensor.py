@@ -5,6 +5,8 @@ import socket
 
 bus = smbus.SMBus(1)
 tank_capacity_liters = 18.9
+max_distance = 40
+min_distance = 10
 
 TRIG_PIN = 4
 ECHO_PIN = 17
@@ -29,9 +31,8 @@ def setup():
     GPIO.setup(TRIG_PIN, GPIO.OUT)
     GPIO.setup(ECHO_PIN, GPIO.IN)
     GPIO.output(TRIG_PIN, False)
-    print("Waiting for the sensor to settle")
     time.sleep(2)
-    print("Ready")
+    print("sensor ready")
 
 def calculate_distance():
     GPIO.output(TRIG_PIN, True)
@@ -54,8 +55,6 @@ def calculate_distance():
     return distance_cm
 
 def calculate_percentage(distance_cm):
-    max_distance = 40
-    min_distance = 10
     percentage = ((max_distance - distance_cm) / (max_distance - min_distance) ) * 100
     if percentage < 0:
         percentage = 0
@@ -116,6 +115,5 @@ while True:
          
     lcd_string(f'IP:{get_ip_address()}', 2) 
     lcd_string(f"WATER LEVEL:{water_percentage}%", 1)
-    print(water_percentage)
     time.sleep(.5)
     

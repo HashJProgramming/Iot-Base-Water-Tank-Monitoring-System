@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Settings - WTMS</title>
+    <title>Tanks - WTMS</title>
     <meta name="description" content="IoT-Base Water Tank Monitoring System">
     <script>
         (function() {
@@ -125,176 +125,38 @@
     <div id="content">
         <div class="container-fluid">
             <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                <h3 class="text-dark mb-0">Settings</h3><button class="btn btn-primary btn-sm float-end d-sm-inline-block" data-bs-toggle="modal" data-bss-tooltip="" data-bs-placement="left" type="button" data-bs-target="#change" title="Here you can change your account password."><i class="fas fa-user-check fa-sm text-white-50"></i>&nbsp;Change Password</button>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-xl-3 mb-4">
-                    <div class="card shadow border-start-success py-2">
-                        <div class="card-body">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col me-2">
-                                    <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Time</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 hours">00</span><span class="fs-2">:</span><span class="fs-2 min">00</span><span class="fs-2">:</span><span class="fs-2 sec">00</span><span class="fs-2 ampm">0</span></div>
-                                </div>
-                                <div class="col-auto"><i class="fas fa-water fa-2x text-gray-300"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-3 mb-4">
-                    <div class="card shadow border-start-success py-2">
-                        <div class="card-body">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col me-2">
-                                    <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>ALERT HIGH (CM)</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 rangehigh">100</span></div>
-                                </div>
-                                <div class="col-auto"><i class="fas fa-level-up-alt fa-2x text-gray-300"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-3 mb-4">
-                    <div class="card shadow border-start-primary py-2">
-                        <div class="card-body">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col me-2">
-                                    <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>ALERT LOW (CM)</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 rangelow">10</span></div>
-                                </div>
-                                <div class="col-auto"><i class="fas fa-level-down-alt fa-2x text-gray-300"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-3 mb-4">
-                    <div class="card shadow border-start-warning py-2">
-                        <div class="card-body">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col me-2">
-                                    <div class="text-uppercase text-danger fw-bold text-xs mb-1"><span>today WATER ALERTS</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2">0</span></div>
-                                </div>
-                                <div class="col-auto"><i class="fas fa-cogs fa-2x text-gray-300"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-2">
-                <div class="col">
-                    <div class="card shadow my-5">
-                        <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold">Alert Settings</p>
-                        </div>
-                        <div class="card-body">
-                            <form class="text-primary" method="post">
-                                <div class="my-1 mb-4"><label class="form-label">Water level high threshold (cm)</label><input class="form-range" type="range" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can adjust the water level alert threshold" name="high" onchange="rangehigh(this.value)" value="100"></div>
-                                <div class="my-1 mb-4"><label class="form-label">Water level low threshold (cm)</label><input class="form-range" type="range" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can adjust the water level alert threshold" name="low" onchange="rangelow(this.value)" value="10"></div>
-                                <div class="text-center my-1"><button class="btn btn-primary" type="submit">Save</button></div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow my-5">
-                        <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold">Raspberry Pi Performance</p>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>CPU</th>
-                                            <th>STORAGE</th>
-                                            <th>RAM</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>10%</td>
-                                            <td>8GB</td>
-                                            <td>2048</td>
-                                        </tr>
-                                        <tr></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <p class="text-primary m-0 fw-bold">Server Performance</p>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Response</th>
-                                            <th>IP Address</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>10%</td>
-                                            <td>127.0.0.1:5000</td>
-                                        </tr>
-                                        <tr></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow my-5">
-                        <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold">Data Settings</p>
-                        </div>
-                        <div class="card-body">
-                            <div class="my-1"><label class="form-label">System Rest - This action will result in the removal of all data, including water-data information from the system.</label></div>
-                            <div class="text-center my-1"><button class="btn btn-danger" type="button" data-bs-target="#reset" data-bs-toggle="modal">System Reset</button></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow my-5">
-                        <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold">Sensor Status</p>
-                        </div>
-                        <div class="card-body">
-                            <div class="my-1"><label class="form-label">Ultrasonic Sensor (<span style="color: rgb(78, 223, 119);">Running</span>)</label></div>
-                            <div class="text-center my-1"><button class="btn btn-danger" type="button" data-bs-target="#sensor" data-bs-toggle="modal">Restart</button></div>
-                        </div>
-                    </div>
-                </div>
+                <h3 class="text-dark mb-0">Tank Management</h3><button class="btn btn-primary float-end d-sm-inline-block" data-bs-toggle="modal" data-bss-tooltip="" data-bs-placement="left" type="button" data-bs-target="#create" title="Here you can create new customer."><i class="fas fa-truck-loading fa-sm text-white-50"></i>&nbsp;Add Tank</button>
             </div>
             <div class="card shadow my-5">
                 <div class="card-header py-3">
-                    <p class="text-primary m-0 fw-bold">User Logs</p>
+                    <p class="text-primary m-0 fw-bold">Rental List</p>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
                         <table class="table table-hover my-0" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Process</th>
+                                    <th>Tank</th>
+                                    <th>Hight (cm)</th>
                                     <th>Status</th>
-                                    <th>Message</th>
                                     <th>Date</th>
+                                    <th class="text-center">Option</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>0</td>
-                                    <td>Login</td>
-                                    <td>Success</td>
-                                    <td>Granted</td>
-                                    <td>2008/11/28</td>
+                                    <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/reservoir.png">Space Tank</td>
+                                    <td>12</td>
+                                    <td class="text-success">Activated</td>
+                                    <td>Date</td>
+                                    <td class="text-center"><a data-bs-toggle="tooltip" data-bss-tooltip="" class="mx-1" href="#" title="Here you  can select tank to use in water monitoring."><i class="far fa-check-circle text-primary" style="font-size: 20px;" title="Here you  can select Tank to use."></i></a><a data-bs-toggle="modal" data-bss-tooltip="" class="mx-1" href="#" data-bs-target="#update" title="Here you can update the tank info."><i class="far fa-edit text-warning" data-bs-toggle="tooltip" data-bss-tooltip="" style="font-size: 20px;"></i></a><a data-bs-toggle="modal" data-bss-tooltip="" class="mx-1" href="#" data-bs-target="#remove" title="Here you can remove the tank."><i class="far fa-trash-alt text-danger" style="font-size: 20px;"></i></a></td>
                                 </tr>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Add Tank</td>
-                                    <td>Success</td>
-                                    <td>Tank Saved</td>
-                                    <td>2009/10/09</td>
+                                    <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/reservoir.png">&nbsp;Moon Tank</td>
+                                    <td>12</td>
+                                    <td class="text-danger">Not Activate</td>
+                                    <td>Date</td>
+                                    <td class="text-center"><a data-bs-toggle="modal" data-bss-tooltip="" class="mx-1" href="#" data-bs-target="#update" title="Here you  can select tank to use in water monitoring."><i class="far fa-check-circle text-primary" style="font-size: 20px;"></i></a><a data-bs-toggle="modal" data-bss-tooltip="" class="mx-1" href="#" data-bs-target="#update" title="Here you can update tank info."><i class="far fa-edit text-warning" data-bs-toggle="tooltip" data-bss-tooltip="" style="font-size: 20px;"></i></a><a data-bs-toggle="modal" data-bss-tooltip="" class="mx-1" href="#" data-bs-target="#remove" title="Here you can remove the tank."><i class="far fa-trash-alt text-danger" style="font-size: 20px;"></i></a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -302,49 +164,54 @@
                 </div>
             </div>
         </div>
-    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
-    <div class="modal fade" role="dialog" tabindex="-1" id="change">
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="create">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Change Password</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                    <h4 class="modal-title">Add Tank</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="my-1"><label class="form-label">Current Password</label><input class="form-control" type="text" required="" pattern="^(?!\s).*$"></div>
-                        <div class="my-1"><label class="form-label">New Password</label><input class="form-control" type="text" pattern="^(?!\s).*$" required=""></div>
+                        <div style="margin-top: 5px;"><label class="form-label">Tank</label><input class="form-control" type="text" placeholder="Tank (Name, Brand)" name="name" required="" pattern="^(?!\s).*$"></div>
+                        <div style="margin-top: 5px;"><label class="form-label">Height (cm)</label><input class="form-control" type="text" placeholder="Tank Height" name="item" required="" pattern="^(?!\s).*$"></div>
+                        <div style="margin-top: 5px;"><label class="form-label">Liter</label><input class="form-control" type="text" placeholder="Tank Liter" name="item" required="" pattern="[0-9]+" minlength="11" maxlength="11"></div>
                     </form>
                 </div>
                 <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
             </div>
         </div>
     </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="sensor">
+    <div class="modal fade" role="dialog" tabindex="-1" id="update">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Sensor Restart</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                    <h4 class="modal-title">Add Tank</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to restart the system sensor?</p>
+                    <form>
+                        <div style="margin-top: 5px;"><label class="form-label">Tank</label><input class="form-control" type="text" placeholder="Tank (Name, Brand)" name="name" required="" pattern="^(?!\s).*$"></div>
+                        <div style="margin-top: 5px;"><label class="form-label">Height (cm)</label><input class="form-control" type="text" placeholder="Tank Height" name="item" required="" pattern="^(?!\s).*$"></div>
+                        <div style="margin-top: 5px;"><label class="form-label">Liter</label><input class="form-control" type="text" placeholder="Tank Liter" name="item" required="" pattern="[0-9]+" minlength="11" maxlength="11"></div>
+                    </form>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Restart</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
             </div>
         </div>
     </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="reset">
+    <div class="modal fade" role="dialog" tabindex="-1" id="confirm">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Data Settings</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                    <h4 class="modal-title">Confirmation</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to system reset?</p>
+                    <p>Are you sure you want to remove this?</p>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Reset</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="button">Remove</button></div>
             </div>
         </div>
-    </div>
+    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
