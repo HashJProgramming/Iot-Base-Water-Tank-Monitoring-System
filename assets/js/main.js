@@ -110,14 +110,24 @@ $(document).ready(function() {
             },1000);
         
         
-
+        const x = true;
         setInterval(function() {
             fetch('http://192.168.8.192:5000/check_sensor')
                 .then(response => response.json()) 
                 .then(data => {
                     $(".sensor-status").html(data.status);
                     if(data.status == "Running"){
-                        $(".restart-btn").html("Stop");
+                        $(".restart-btn").html("Restart");
+                    }else{
+                        if(x){
+                            fetch('http://192.168.8.192:5000/start')
+                            .then(response => response.json()) 
+                            .then(data => {
+                                $(".sensor-status").html(data.status);
+                                console.log(data.message);
+                        })
+                        x = false;
+                        }
                     }
                     
                 })

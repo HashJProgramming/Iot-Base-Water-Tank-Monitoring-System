@@ -1,5 +1,6 @@
 import time
 from flask import Flask, jsonify
+from flask_cors import CORS
 import RPi.GPIO as GPIO
 import smbus2 as smbus
 import socket
@@ -9,6 +10,8 @@ import mysql.connector
 import os
 
 app = Flask(__name__)
+CORS(app)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 bus = smbus.SMBus(1)
 TRIG = 4
@@ -195,6 +198,7 @@ def restart_monitor():
 
 @app.route('/check_sensor', methods=['GET'])
 def check_sensor():
+    global running
     if running:
         return jsonify(status='Running')
     else:
