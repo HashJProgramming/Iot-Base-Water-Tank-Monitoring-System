@@ -30,7 +30,6 @@ LCD_LINE_2 = 0xC0
 LCD_BACKLIGHT_ON = 0x08
 LCD_BACKLIGHT_OFF = 0x00
 
-monitor_thread = None
 running = False
 
 # HASH'J PROGRAMMING DB GET DATA START
@@ -133,6 +132,7 @@ def set_settings():
     if tank_status_result:
         tank_capacity_liters = tank_status_result[0]
     # print(tank_capacity_liters)
+    return max_distance, min_distance, tank_capacity_liters
 
 def save_data(distance, percentage, liters):
     sql = "INSERT INTO water_data (distance, level, liters) VALUES (%s, %s, %s)"
@@ -141,7 +141,9 @@ def save_data(distance, percentage, liters):
     db.commit()
 
 def monitor():
+    global running
     set_settings()
+    running = True
     while running:
         distance_cm = distance()
         water_percentage = calculate_percentage(distance_cm)
@@ -159,7 +161,8 @@ def monitor():
         save_data(distance_cm, water_percentage, water_liters)
         lcd_string(f'IP:{get_ip_address()}', 2) 
         lcd_string(f"WATER LEVEL:{water_percentage}%", 1)
-        time.sleep(0.5)
+        time.sleep(1.5)
+    running = False
 
 @app.route('/WTMS/')
 def index():
@@ -169,32 +172,15 @@ def index():
     lcd_string(f"WATER LEVEL:{percent}%", 1)
     return jsonify({"distance": dis, "percent": percent})  # Return distance as JSON
 
-@app.route('/WTMS/start', methods=['POST', 'GET'])
-def start_monitor():
-    global monitor_thread, running
-    if monitor_thread is None or not monitor_thread.is_alive():
-        running = True
-        monitor_thread = threading.Thread(target=monitor)
-        monitor_thread.start()
-        return jsonify(message='Monitoring started')
-    else:
-        return jsonify(message='Monitoring is already running')
+@app.route('/WTMS/start', methods=['GET'])
+def start():
+    return jsonify(status='Sensor Started', sensor=monitor())
 
-@app.route('/WTMS/stop', methods=['POST', 'GET'])
-def stop_monitor():
+    
+@app.route('/WTMS/restart', methods=['GET'])
+def restart():
     global running
-    if monitor_thread and monitor_thread.is_alive():
-        running = False
-        monitor_thread.join()
-        return jsonify(message='Monitoring stopped')
-    else:
-        return jsonify(message='Monitoring is not running')
-
-@app.route('/WTMS/restart', methods=['POST', 'GET'])
-def restart_monitor():
-    stop_monitor()
-    start_monitor()
-    return jsonify(message='Monitoring restarted')
+    return jsonify(status='Sensor Settings updated', result=set_settings())
 
 @app.route('/WTMS/check_sensor', methods=['GET'])
 def check_sensor():

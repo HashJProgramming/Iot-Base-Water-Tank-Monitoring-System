@@ -127,32 +127,6 @@ include_once 'functions/get-data.php';
                     </div>
                 </div>
                 <div class="col-md-6 col-xl-3 mb-4">
-                    <div class="card shadow border-start-success py-2">
-                        <div class="card-body">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col me-2">
-                                    <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>ALERT HIGH (cm)</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 rangehigh"><?php echo settings_data()['high_threshold']?></span><span class="fs-2">cm</span></div>
-                                </div>
-                                <div class="col-auto"><i class="fas fa-level-up-alt fa-2x text-gray-300"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-3 mb-4">
-                    <div class="card shadow border-start-primary py-2">
-                        <div class="card-body">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col me-2">
-                                    <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>ALERT LOW (cm)</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 rangelow"><?php echo settings_data()['low_threshold']?></span><span class="fs-2">cm</span></div>
-                                </div>
-                                <div class="col-auto"><i class="fas fa-level-down-alt fa-2x text-gray-300"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-3 mb-4">
                     <div class="card shadow border-start-warning py-2">
                         <div class="card-body">
                             <div class="row align-items-center no-gutters">
@@ -187,6 +161,32 @@ include_once 'functions/get-data.php';
                                     <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 water-liters">0L</span></div>
                                 </div>
                                 <div class="col-auto"><i class="fas fa-chart-pie fa-2x text-gray-300"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3 mb-4">
+                    <div class="card shadow border-start-success py-2">
+                        <div class="card-body">
+                            <div class="row align-items-center no-gutters">
+                                <div class="col me-2">
+                                    <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>ALERT HIGH (cm)</span></div>
+                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 rangehigh"><?php echo settings_data()['high_threshold']?></span><span class="fs-2">cm</span></div>
+                                </div>
+                                <div class="col-auto"><i class="fas fa-level-up-alt fa-2x text-gray-300"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3 mb-4">
+                    <div class="card shadow border-start-primary py-2">
+                        <div class="card-body">
+                            <div class="row align-items-center no-gutters">
+                                <div class="col me-2">
+                                    <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>ALERT LOW (cm)</span></div>
+                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 rangelow"><?php echo settings_data()['low_threshold']?></span><span class="fs-2">cm</span></div>
+                                </div>
+                                <div class="col-auto"><i class="fas fa-level-down-alt fa-2x text-gray-300"></i></div>
                             </div>
                         </div>
                     </div>
@@ -330,7 +330,7 @@ include_once 'functions/get-data.php';
                 <div class="modal-body">
                     <p>Are you sure you want to interrupt the system sensor?</p>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button id="restart" class="btn btn-danger restart-btn" type="button">Restart</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button id="restarts" class="btn btn-danger restart-btn" type="button">Restart</button></div>
             </div>
         </div>
     </div>
@@ -415,14 +415,11 @@ include_once 'functions/get-data.php';
                 .catch(error => console.error('Error:', error));
         }, 1000);
     
-        document.getElementById('restart').addEventListener('click', function() {
-            // Perform the fetch request to the Flask API
+        document.getElementById('restarts').addEventListener('click', function() {
             fetch('http://<?php echo $_SERVER['SERVER_NAME']; ?>:5000/WTMS/restart')
                 .then(response => response.json())
                 .then(data => {
-                    // Display a message if needed
                     console.log(data.message);
-                    // Perform the redirect
                     window.location.href = 'settings.php?type=success&message=System Sensor Restarted successfully!';
                 })
                 .catch(error => console.error('Error:', error));

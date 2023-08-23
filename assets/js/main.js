@@ -95,19 +95,38 @@ $(document).ready(function() {
         $(".ampm").html(ampm.toUpperCase());
         },1000);
 
+        var lastAlertTime = 0;
         setInterval( function() {
             $.ajax({
-                url: 'functions/water-stats.php',  // Replace with your actual endpoint
+                url: 'functions/water-stats.php',  
                 dataType: 'json',
                 success: function(data) {
-                    $('.water-level').html(data['level']+"%");
-                    $('.water-liters').html(data['liters']+"L");
-                    if (data['level'] < 10) {
-                        Swal.fire(
-                            'Critical Water Level!',
-                             'Please refill your water tank.',
-                            'warning'
-                          )
+                    $('.water-level').html(data['level'] + "%");
+                    $('.water-liters').html(data['liters'] + "L");
+
+                    var distance = data['distance'];
+                    var lowThreshold = data['low'];
+                    var highThreshold = data['high'];
+
+                    var currentTime = Date.now(); // Get current timestamp
+
+                    // Check if enough time has passed since the last alert
+                    if (currentTime - lastAlertTime >= 180000) {
+                        if (distance < lowThreshold) {
+                            Swal.fire(
+                                'Critical Water Level!',
+                                'Please refill your water tank.',
+                                'warning'
+                            );
+                            lastAlertTime = currentTime; // Update lastAlertTime
+                        } else if (distance > highThreshold) {
+                            Swal.fire(
+                                'Critical Water Level!',
+                                'Please stop filling your water tank.',
+                                'warning'
+                            );
+                            lastAlertTime = currentTime; // Update lastAlertTime
+                        }
                     }
                 },
                 error: function(xhr, status, error) {
