@@ -161,7 +161,7 @@ def monitor():
         lcd_string(f"WATER LEVEL:{water_percentage}%", 1)
         time.sleep(0.5)
 
-@app.route('/')
+@app.route('/WTMS/')
 def index():
     dis = distance()
     percent = calculate_percentage(dis)
@@ -169,7 +169,7 @@ def index():
     lcd_string(f"WATER LEVEL:{percent}%", 1)
     return jsonify({"distance": dis, "percent": percent})  # Return distance as JSON
 
-@app.route('/start', methods=['POST', 'GET'])
+@app.route('/WTMS/start', methods=['POST', 'GET'])
 def start_monitor():
     global monitor_thread, running
     if monitor_thread is None or not monitor_thread.is_alive():
@@ -180,7 +180,7 @@ def start_monitor():
     else:
         return jsonify(message='Monitoring is already running')
 
-@app.route('/stop', methods=['POST', 'GET'])
+@app.route('/WTMS/stop', methods=['POST', 'GET'])
 def stop_monitor():
     global running
     if monitor_thread and monitor_thread.is_alive():
@@ -190,13 +190,13 @@ def stop_monitor():
     else:
         return jsonify(message='Monitoring is not running')
 
-@app.route('/restart', methods=['POST', 'GET'])
+@app.route('/WTMS/restart', methods=['POST', 'GET'])
 def restart_monitor():
     stop_monitor()
     start_monitor()
     return jsonify(message='Monitoring restarted')
 
-@app.route('/check_sensor', methods=['GET'])
+@app.route('/WTMS/check_sensor', methods=['GET'])
 def check_sensor():
     global running
     if running:
@@ -204,7 +204,7 @@ def check_sensor():
     else:
         return jsonify(status='Not running')
 
-@app.route('/get_system_stats')
+@app.route('/WTMS/get_system_stats')
 def get_system_stats():
     cpu_percent = psutil.cpu_percent()
     memory_info = psutil.virtual_memory()

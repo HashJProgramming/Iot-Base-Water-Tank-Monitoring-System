@@ -101,6 +101,33 @@ if (isset($_SESSION['username'])){
     <script src="assets/js/vanta.waves.min.js"></script>
     <script src="assets/js/sweetalert2.all.min.js"></script>
     <script src="assets/js/main.js"></script>
+    <script>
+        var x = true;
+        setInterval(function() {
+            fetch('http://<?php echo $_SERVER['SERVER_NAME']; ?>:5000/WTMS/check_sensor')
+                .then(response => response.json()) 
+                .then(data => {
+                    $(".sensor-status").html(data.status);
+                    if(data.status == "Running"){
+                        $(".restart-btn").html("Restart");
+                        // console.log(data.status);
+                    }else{
+                        if(x){
+                            fetch('http://<?php echo $_SERVER['SERVER_NAME']; ?>:5000/WTMS/start')
+                            .then(response => response.json()) 
+                            .then(data => {
+                                $(".sensor-status").html(data.status);
+                                // console.log(data.message);
+                        })
+                        x = false;
+                        }
+                    }
+                    
+                })
+                .catch(error => console.error('Error:', error));
+        }, 1000);
+        
+</script>
 </body>
 
 </html>
