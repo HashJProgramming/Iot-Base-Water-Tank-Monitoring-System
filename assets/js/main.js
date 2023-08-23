@@ -147,7 +147,7 @@ $(document).ready(function() {
         
             document.getElementById('restart').addEventListener('click', function() {
                 // Perform the fetch request to the Flask API
-                fetch('http://192.168.8.192:5000/restart_sensor')
+                fetch('http://192.168.8.192:5000/restart')
                     .then(response => response.json())
                     .then(data => {
                         // Display a message if needed
