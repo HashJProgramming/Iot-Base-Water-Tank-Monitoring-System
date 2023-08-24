@@ -103,29 +103,26 @@ $(document).ready(function() {
                 success: function(data) {
                     $('.water-level').html(data['level'] + "%");
                     $('.water-liters').html(data['liters'] + "L");
-
-                    var distance = data['distance'];
-                    var lowThreshold = data['low'];
-                    var highThreshold = data['high'];
-
-                    var currentTime = Date.now(); // Get current timestamp
-
-                    // Check if enough time has passed since the last alert
+                    $(".distance").html(data['distance']);
+                    const level = data['level'];
+                    var currentTime = Date.now();
+                   
                     if (currentTime - lastAlertTime >= 180000) {
-                        if (distance < lowThreshold) {
+                        if (level < 0) {
                             Swal.fire(
-                                'Critical Water Level!',
+                                'Critical High Water Level!',
                                 'Please refill your water tank.',
                                 'warning'
                             );
-                            lastAlertTime = currentTime; // Update lastAlertTime
-                        } else if (distance > highThreshold) {
+                            lastAlertTime = currentTime; 
+                        } 
+                        if (level > 100) {
                             Swal.fire(
-                                'Critical Water Level!',
+                                'Critical Low Water Level!',
                                 'Please stop filling your water tank.',
                                 'warning'
                             );
-                            lastAlertTime = currentTime; // Update lastAlertTime
+                            lastAlertTime = currentTime;
                         }
                     }
                 },

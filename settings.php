@@ -113,6 +113,7 @@ include_once 'functions/get-data.php';
                 <button class="btn btn-primary btn-sm float-end d-sm-inline-block" data-bs-toggle="modal" data-bss-tooltip="" data-bs-placement="left" type="button" data-bs-target="#change" title="Here you can change your account password."><i class="fas fa-user-check fa-sm text-white-50"></i>&nbsp;Change Password</button>
             </div>
             <div class="row">
+
                 <div class="col-md-6 col-xl-3 mb-4">
                     <div class="card shadow border-start-success py-2">
                         <div class="card-body">
@@ -126,19 +127,7 @@ include_once 'functions/get-data.php';
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-xl-3 mb-4">
-                    <div class="card shadow border-start-warning py-2">
-                        <div class="card-body">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col me-2">
-                                    <div class="text-uppercase text-danger fw-bold text-xs mb-1"><span>Sensor Status</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 sensor-status">0</span></div>
-                                </div>
-                                <div class="col-auto"><i class="fas fa-cogs fa-2x text-gray-300"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="col-md-6 col-xl-3 mb-4">
                     <div class="card shadow border-start-primary py-2">
                         <div class="card-body">
@@ -152,6 +141,7 @@ include_once 'functions/get-data.php';
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-6 col-xl-3 mb-4">
                     <div class="card shadow border-start-primary py-2">
                         <div class="card-body">
@@ -165,32 +155,77 @@ include_once 'functions/get-data.php';
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-6 col-xl-3 mb-4">
+                    <div class="card shadow border-start-warning py-2">
+                        <div class="card-body">
+                            <div class="row align-items-center no-gutters">
+                                <div class="col me-2">
+                                    <div class="text-uppercase text-danger fw-bold text-xs mb-1"><span>Sensor Status</span></div>
+                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 sensor-status">0</span></div>
+                                </div>
+                                <div class="col-auto"><i class="fas fa-cogs fa-2x text-gray-300"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-md-6 col-xl-3 mb-4">
                     <div class="card shadow border-start-success py-2">
                         <div class="card-body">
                             <div class="row align-items-center no-gutters">
                                 <div class="col me-2">
                                     <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>ALERT HIGH (cm)</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 rangehigh"><?php echo settings_data()['high_threshold']?></span><span class="fs-2">cm</span></div>
+                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 rangehigh"><?php echo settings_data()['high']?></span><span class="fs-2">cm</span></div>
                                 </div>
                                 <div class="col-auto"><i class="fas fa-level-up-alt fa-2x text-gray-300"></i></div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-6 col-xl-3 mb-4">
                     <div class="card shadow border-start-primary py-2">
                         <div class="card-body">
                             <div class="row align-items-center no-gutters">
                                 <div class="col me-2">
                                     <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>ALERT LOW (cm)</span></div>
-                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 rangelow"><?php echo settings_data()['low_threshold']?></span><span class="fs-2">cm</span></div>
+                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 rangelow"><?php echo settings_data()['low']?></span><span class="fs-2">cm</span></div>
                                 </div>
                                 <div class="col-auto"><i class="fas fa-level-down-alt fa-2x text-gray-300"></i></div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-6 col-xl-3 mb-4">
+                    <div class="card shadow border-start-primary py-2">
+                        <div class="card-body">
+                            <div class="row align-items-center no-gutters">
+                                <div class="col me-2">
+                                    <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Distance (cm)</span></div>
+                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 distance">0</span><span class="fs-2">cm</span></div>
+                                </div>
+                                <div class="col-auto"><i class="fas fa-level-down-alt fa-2x text-gray-300"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl-3 mb-4">
+                    <div class="card shadow border-start-warning py-2">
+                        <div class="card-body">
+                            <div class="row align-items-center no-gutters">
+                                <div class="col me-2">
+                                    <div class="text-uppercase text-danger fw-bold text-xs mb-1"><span>Alert</span></div>
+                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2"><?php echo settings_data()['alerts']?></span></div>
+                                </div>
+                                <div class="col-auto"><i class="fas fa-cogs fa-2x text-gray-300"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             
             <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-2">
@@ -201,8 +236,8 @@ include_once 'functions/get-data.php';
                         </div>
                         <div class="card-body">
                             <form class="text-primary" method="post" action="functions/save_settings.php">
-                                <div class="my-1 mb-4"><label class="form-label">Water level high threshold (cm)</label><input class="form-range" type="range" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can adjust the water level alert threshold" name="high" onchange="rangehigh(this.value)" value="<?php echo settings_data()['high_threshold']?>" min="<?php echo settings_data()['low_threshold']?>" max="<?php echo max_distance()['height']?>"></div>
-                                <div class="my-1 mb-4"><label class="form-label">Water level low threshold (cm)</label><input class="form-range" type="range" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can adjust the water level alert threshold" name="low" onchange="rangelow(this.value)" value="<?php echo settings_data()['low_threshold']?>"></div>
+                                <div class="my-1 mb-4"><label class="form-label">Water level high threshold (cm)</label><input class="form-range" type="range" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can adjust the water level alert threshold" name="high" onchange="rangehigh(this.value)" value="<?php echo settings_data()['high']?>" min="<?php echo settings_data()['low']?>" max="<?php echo max_distance()['height']?>"></div>
+                                <div class="my-1 mb-4"><label class="form-label">Water level low threshold (cm)</label><input class="form-range" type="range" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can adjust the water level alert threshold" name="low" onchange="rangelow(this.value)" value="<?php echo settings_data()['low']?>"></div>
                                 <div class="text-center my-1"><button class="btn btn-primary" type="submit">Save</button></div>
                             </form>
                         </div>

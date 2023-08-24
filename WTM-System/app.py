@@ -103,18 +103,15 @@ def distance():
         pass
     time2 = time.time()
     during = time2 - time1
-    return during * 340 / 2 * 100
+    return round(during * 340 / 2 * 100, 1)
 
 def calculate_percentage(distance_cm):
-        if max_distance == min_distance:
-            return 100  # Handle division by zero
         percentage = ((max_distance - distance_cm) / (max_distance - min_distance)) * 100
-        if percentage < 0:
-            percentage = 0
-        return round(percentage)
+        return round(percentage, 1)
 
 def calculate_liters(percentage):
-    return round((percentage / 100) * tank_capacity_liters, 2)
+    # return round((percentage / 100) * tank_capacity_liters, 2)
+    return round((percentage / 100) * tank_capacity_liters, 1)
 
 def set_settings():
     global max_distance, min_distance, tank_capacity_liters
@@ -128,11 +125,9 @@ def set_settings():
     sql_tank_status = "SELECT liters FROM water_tank WHERE status = 'active'"
     cursor.execute(sql_tank_status)
     tank_status_result = cursor.fetchone()
-    # print(tank_status_result)   
+
     if tank_status_result:
         tank_capacity_liters = tank_status_result[0]
-    # print(tank_capacity_liters)
-    return max_distance, min_distance, tank_capacity_liters
 
 def save_data(distance, percentage, liters):
     sql = "INSERT INTO water_data (distance, level, liters) VALUES (%s, %s, %s)"
@@ -148,16 +143,6 @@ def monitor():
         distance_cm = distance()
         water_percentage = calculate_percentage(distance_cm)
         water_liters = calculate_liters(water_percentage)
-        sql = "INSERT INTO water_data (distance, level, liters) VALUES (%s, %s, %s)"
-        values = (distance_cm, water_percentage, water_liters)
-        cursor.execute(sql, values)
-        db.commit()
-        
-        if water_percentage < 0:
-            water_percentage = 0
-            water_liters = 0
-        elif water_percentage >= 100:
-            water_percentage = 100
         save_data(distance_cm, water_percentage, water_liters)
         lcd_string(f'IP:{get_ip_address()}', 2) 
         lcd_string(f"WATER LEVEL:{water_percentage}%", 1)
@@ -179,8 +164,9 @@ def start():
     
 @app.route('/WTMS/restart', methods=['GET'])
 def restart():
-    global running
-    return jsonify(status='Sensor Settings updated', result=set_settings())
+    time.sleep(1)
+    set_settings()
+    return jsonify(status='200', message='Sensor Restarted')
 
 @app.route('/WTMS/check_sensor', methods=['GET'])
 def check_sensor():
