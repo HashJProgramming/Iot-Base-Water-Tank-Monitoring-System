@@ -76,7 +76,7 @@ $(document).ready(function() {
                 'error'
               )
         }
-    
+
         setInterval( function() {
         var hours = new Date().getHours();
         $(".hours").html(( hours < 10 ? "0" : "" ) + hours);

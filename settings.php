@@ -2,6 +2,7 @@
 include_once 'functions/authentication.php';
 include_once 'functions/header.php';
 include_once 'functions/get-data.php';
+include_once 'functions/get-table.php';
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" id="bg-animation" lang="en">
@@ -217,7 +218,7 @@ include_once 'functions/get-data.php';
                         <div class="card-body">
                             <div class="row align-items-center no-gutters">
                                 <div class="col me-2">
-                                    <div class="text-uppercase text-danger fw-bold text-xs mb-1"><span>Today Alerts</span></div>
+                                    <div class="text-uppercase text-danger fw-bold text-xs mb-1"><span>Alerts</span></div>
                                     <div class="text-dark fw-bold h5 mb-0"><span class="fs-2"><?php echo settings_data()['alerts']?></span></div>
                                 </div>
                                 <div class="col-auto"><i class="fas fa-cogs fa-2x text-gray-300"></i></div>
@@ -303,7 +304,7 @@ include_once 'functions/get-data.php';
             </div>
             <div class="card shadow my-5">
                 <div class="card-header py-3">
-                    <p class="text-primary m-0 fw-bold">Rental List</p>
+                    <p class="text-primary m-0 fw-bold">Tank List</p>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
@@ -311,69 +312,35 @@ include_once 'functions/get-data.php';
                             <thead>
                                 <tr>
                                     <th>Tank</th>
-                                    <th>Hight (cm)</th>
+                                    <th>Height (cm)</th>
+                                    <th>Liter (l)</th>
                                     <th>Status</th>
                                     <th>Date</th>
                                     <th class="text-center">Option</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/reservoir.png">Space Tank</td>
-                                    <td>12</td>
-                                    <td class="text-success">Activated</td>
-                                    <td>Date</td>
-                                    <td class="text-center"><a data-bs-toggle="tooltip" data-bss-tooltip="" class="mx-1" href="#" title="Here you  can select tank to use in water monitoring."><i class="far fa-check-circle text-primary" style="font-size: 20px;" title="Here you  can select Tank to use."></i></a><a data-bs-toggle="modal" data-bss-tooltip="" class="mx-1" href="#" data-bs-target="#update" title="Here you can update the tank info."><i class="far fa-edit text-warning" data-bs-toggle="tooltip" data-bss-tooltip="" style="font-size: 20px;"></i></a><a data-bs-toggle="modal" data-bss-tooltip="" class="mx-1" href="#" data-bs-target="#remove" title="Here you can remove the tank."><i class="far fa-trash-alt text-danger" style="font-size: 20px;"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/reservoir.png">&nbsp;Moon Tank</td>
-                                    <td>12</td>
-                                    <td class="text-danger">Not Activate</td>
-                                    <td>Date</td>
-                                    <td class="text-center"><a data-bs-toggle="modal" data-bss-tooltip="" class="mx-1" href="#" data-bs-target="#update" title="Here you  can select tank to use in water monitoring."><i class="far fa-check-circle text-primary" style="font-size: 20px;"></i></a><a data-bs-toggle="modal" data-bss-tooltip="" class="mx-1" href="#" data-bs-target="#update" title="Here you can update tank info."><i class="far fa-edit text-warning" data-bs-toggle="tooltip" data-bss-tooltip="" style="font-size: 20px;"></i></a><a data-bs-toggle="modal" data-bss-tooltip="" class="mx-1" href="#" data-bs-target="#remove" title="Here you can remove the tank."><i class="far fa-trash-alt text-danger" style="font-size: 20px;"></i></a></td>
-                                </tr>
+                                <?php
+                                    tank_list();
+                                ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
             <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                <h3 class="text-dark mb-0">User Activity Logs</h3>
-                <a class="btn btn-warning btn-sm float-end d-sm-inline-block" href="/phpmyadmin"><i class="fas fa-user-check fa-sm text-white-50"></i>&nbsp;phpMyAdmin</a>
+                <h3 class="text-dark mb-0">Database Stats</h3>
+                <a class="btn btn-warning btn-sm float-end d-sm-inline-block" href="/phpmyadmin" target="_blank"><i class="fas fa-user-check fa-sm text-white-50"></i>&nbsp;phpMyAdmin</a>
             </div>
             <div class="card shadow my-5">
                 <div class="card-header py-3">
-                    <p class="text-primary m-0 fw-bold">User Logs</p>
+                    <p class="text-primary m-0 fw-bold">Database Stats</p>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
-                        <table class="table table-hover my-0" id="dataTable">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Process</th>
-                                    <th>Status</th>
-                                    <th>Message</th>
-                                    <th>Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>0</td>
-                                    <td>Login</td>
-                                    <td>Success</td>
-                                    <td>Granted</td>
-                                    <td>2008/11/28</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Add Tank</td>
-                                    <td>Success</td>
-                                    <td>Tank Saved</td>
-                                    <td>2009/10/09</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <?php 
+                            database_stats();
+                        ?>
                     </div>
                 </div>
             </div>
@@ -428,13 +395,13 @@ include_once 'functions/get-data.php';
                     <h4 class="modal-title">Add Tank</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div style="margin-top: 5px;"><label class="form-label">Tank</label><input class="form-control" type="text" placeholder="Tank (Name, Brand)" name="name" required="" pattern="^(?!\s).*$"></div>
-                        <div style="margin-top: 5px;"><label class="form-label">Height (cm)</label><input class="form-control" type="text" placeholder="Tank Height" name="item" required="" pattern="^(?!\s).*$"></div>
-                        <div style="margin-top: 5px;"><label class="form-label">Liter</label><input class="form-control" type="text" placeholder="Tank Liter" name="item" required="" pattern="[0-9]+" minlength="11" maxlength="11"></div>
-                    </form>
+                    <form action="functions/tank-add.php" method="post">
+                    <div style="margin-top: 5px;"><label class="form-label">Tank</label><input class="form-control" type="text" placeholder="Tank (Name, Brand)" name="name" required="" pattern="^(?!\s).*$"></div>
+                    <div style="margin-top: 5px;"><label class="form-label">Height (cm)</label><input class="form-control" type="number" placeholder="Tank Height" name="height" required="" pattern="^(?!\s).*$"></div>
+                    <div style="margin-top: 5px;"><label class="form-label">Liters</label><input class="form-control" type="number" placeholder="Tank Liter" name="liters" required="" pattern="[0-9]+" minlength="11" maxlength="11"></div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -445,17 +412,34 @@ include_once 'functions/get-data.php';
                     <h4 class="modal-title">Add Tank</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="functions/tank-update.php" method="post">
+                        <input type="hidden" name="data_id">
                         <div style="margin-top: 5px;"><label class="form-label">Tank</label><input class="form-control" type="text" placeholder="Tank (Name, Brand)" name="name" required="" pattern="^(?!\s).*$"></div>
-                        <div style="margin-top: 5px;"><label class="form-label">Height (cm)</label><input class="form-control" type="text" placeholder="Tank Height" name="item" required="" pattern="^(?!\s).*$"></div>
-                        <div style="margin-top: 5px;"><label class="form-label">Liter</label><input class="form-control" type="text" placeholder="Tank Liter" name="item" required="" pattern="[0-9]+" minlength="11" maxlength="11"></div>
-                    </form>
+                        <div style="margin-top: 5px;"><label class="form-label">Height (cm)</label><input class="form-control" type="number" placeholder="Tank Height" name="height" required="" pattern="^(?!\s).*$"></div>
+                        <div style="margin-top: 5px;"><label class="form-label">Liters</label><input class="form-control" type="number" placeholder="Tank Liter" name="liters" required="" pattern="[0-9]+" minlength="11" maxlength="11"></div>
+                    
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
+                </form>
             </div>
         </div>
     </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="confirm">
+    <div class="modal fade" role="dialog" tabindex="-1" id="remove">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirmation</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to remove this?</p>
+                </div>
+                <form action="functions/tank-remove.php" method="post">
+                    <input type="hidden" name="data_id">
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-danger" type="submit">Remove</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
@@ -476,6 +460,23 @@ include_once 'functions/get-data.php';
 
 <script>
     $(document).ready(function() {
+        $('a[data-bs-target="#update"]').on('click', function(){
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+                var tank_height = $(this).data('height');
+                var liters = $(this).data('liters');
+                $('input[name="data_id"]').val(id);
+                $('input[name="name"]').val(name);
+                $('input[name="height"]').val(tank_height);
+                $('input[name="liters"]').val(liters);
+                // console.log(id, name, tank_height, liters);
+            });
+
+        $('a[data-bs-target="#remove"]').on('click', function(){
+            var id = $(this).data('id');
+            $('input[name="data_id"]').val(id);
+            // console.log(id, name, tank_height, liters);
+        });
 
         var x = true;
         setInterval(function() {

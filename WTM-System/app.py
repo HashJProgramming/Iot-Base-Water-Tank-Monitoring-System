@@ -122,7 +122,7 @@ def set_settings():
     if settings_result:
         max_distance, min_distance = settings_result
 
-    sql_tank_status = "SELECT liters FROM water_tank WHERE status = 'active'"
+    sql_tank_status = "SELECT liters FROM water_tank WHERE status = 'Activated'"
     cursor.execute(sql_tank_status)
     tank_status_result = cursor.fetchone()
 
