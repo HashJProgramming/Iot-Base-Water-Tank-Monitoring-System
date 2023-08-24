@@ -139,7 +139,7 @@ include_once 'functions/get-data.php';
                     
                 })
                 .catch(error => console.error('Error:', error));
-        }, 1000);
+        }, 5000);
         
 </script>
 </body>

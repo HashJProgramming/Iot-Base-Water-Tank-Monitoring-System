@@ -27,3 +27,11 @@ function max_distance(){
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result;
 }
+
+function count_water_data(){
+    global $db;
+    $stmt = $db->prepare("SELECT COUNT(id) as water_data_count FROM `water_data`");
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['water_data_count'];
+}

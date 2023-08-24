@@ -1,6 +1,8 @@
 <?php
 include_once 'functions/authentication.php';
 include_once 'functions/header.php';
+include_once 'functions/get-table.php';
+include_once 'functions/get-data.php';
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" id="bg-animation" lang="en">
@@ -106,7 +108,23 @@ include_once 'functions/header.php';
         nav();
     ?>
     <div id="content">
+
         <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-xl-3 mb-4">
+                    <div class="card shadow border-start-warning py-2">
+                        <div class="card-body">
+                            <div class="row align-items-center no-gutters">
+                                <div class="col me-2">
+                                    <div class="text-uppercase text-danger fw-bold text-xs mb-1"><span>TOTAL DATA</span></div>
+                                    <div class="text-dark fw-bold h5 mb-0"><span class="fs-2"><?php echo number_format(count_water_data())?></span></div>
+                                </div>
+                                <div class="col-auto"><i class="fas fa-cogs fa-2x text-gray-300"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
             <h3 class="text-dark mb-4">Water Data</h3>
             <div class="card shadow my-5">
                 <div class="card-header py-3">
@@ -117,28 +135,17 @@ include_once 'functions/header.php';
                         <table class="table table-hover my-0" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th>Tank</th>
+                                    <th>Tank ID</th>
                                     <th>Level</th>
                                     <th>Liters</th>
-                                    <th>Height(cm)</th>
+                                    <th>Distance(cm)</th>
                                     <th>Date</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/reservoir.png">Space Tank</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>2008/11/28</td>
-                                </tr>
-                                <tr>
-                                    <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/reservoir.png">Moon Tank</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>2009/10/09</td>
-                                </tr>
+                                <?php
+                                    water_data_list();
+                                ?>
                             </tbody>
                         </table>
                     </div>

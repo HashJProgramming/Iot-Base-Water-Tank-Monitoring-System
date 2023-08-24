@@ -284,7 +284,7 @@ include_once 'functions/get-chart.php';
                     
                 })
                 .catch(error => console.error('Error:', error));
-        }, 1000);
+        }, 5000);
         
 </script>
 </body>
