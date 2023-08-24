@@ -22,7 +22,7 @@ function settings_data(){
 
 function max_distance(){
     global $db;
-    $stmt = $db->prepare("SELECT * FROM `water_tank` WHERE status = 'active'");
+    $stmt = $db->prepare("SELECT * FROM `water_tank` WHERE status = 'Activated'");
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result;
