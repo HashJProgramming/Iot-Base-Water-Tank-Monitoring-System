@@ -217,7 +217,7 @@ include_once 'functions/get-data.php';
                         <div class="card-body">
                             <div class="row align-items-center no-gutters">
                                 <div class="col me-2">
-                                    <div class="text-uppercase text-danger fw-bold text-xs mb-1"><span>Alert</span></div>
+                                    <div class="text-uppercase text-danger fw-bold text-xs mb-1"><span>Today Alerts</span></div>
                                     <div class="text-dark fw-bold h5 mb-0"><span class="fs-2"><?php echo settings_data()['alerts']?></span></div>
                                 </div>
                                 <div class="col-auto"><i class="fas fa-cogs fa-2x text-gray-300"></i></div>
@@ -295,6 +295,45 @@ include_once 'functions/get-data.php';
                             <div class="my-1"><label class="form-label">Ultrasonic Sensor (<span class="sensor-status">Waiting. . .</span>)</label></div>
                             <div class="text-center my-1"><button class="btn btn-danger restart-btn" type="button" data-bs-target="#sensor" data-bs-toggle="modal">Restart</button></div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                <h3 class="text-dark mb-0">Tank Management</h3><button class="btn btn-primary float-end d-sm-inline-block" data-bs-toggle="modal" data-bss-tooltip="" data-bs-placement="left" type="button" data-bs-target="#create" title="Here you can create new customer."><i class="fas fa-truck-loading fa-sm text-white-50"></i>&nbsp;Add Tank</button>
+            </div>
+            <div class="card shadow my-5">
+                <div class="card-header py-3">
+                    <p class="text-primary m-0 fw-bold">Rental List</p>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
+                        <table class="table table-hover my-0" id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Tank</th>
+                                    <th>Hight (cm)</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th class="text-center">Option</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/reservoir.png">Space Tank</td>
+                                    <td>12</td>
+                                    <td class="text-success">Activated</td>
+                                    <td>Date</td>
+                                    <td class="text-center"><a data-bs-toggle="tooltip" data-bss-tooltip="" class="mx-1" href="#" title="Here you  can select tank to use in water monitoring."><i class="far fa-check-circle text-primary" style="font-size: 20px;" title="Here you  can select Tank to use."></i></a><a data-bs-toggle="modal" data-bss-tooltip="" class="mx-1" href="#" data-bs-target="#update" title="Here you can update the tank info."><i class="far fa-edit text-warning" data-bs-toggle="tooltip" data-bss-tooltip="" style="font-size: 20px;"></i></a><a data-bs-toggle="modal" data-bss-tooltip="" class="mx-1" href="#" data-bs-target="#remove" title="Here you can remove the tank."><i class="far fa-trash-alt text-danger" style="font-size: 20px;"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/reservoir.png">&nbsp;Moon Tank</td>
+                                    <td>12</td>
+                                    <td class="text-danger">Not Activate</td>
+                                    <td>Date</td>
+                                    <td class="text-center"><a data-bs-toggle="modal" data-bss-tooltip="" class="mx-1" href="#" data-bs-target="#update" title="Here you  can select tank to use in water monitoring."><i class="far fa-check-circle text-primary" style="font-size: 20px;"></i></a><a data-bs-toggle="modal" data-bss-tooltip="" class="mx-1" href="#" data-bs-target="#update" title="Here you can update tank info."><i class="far fa-edit text-warning" data-bs-toggle="tooltip" data-bss-tooltip="" style="font-size: 20px;"></i></a><a data-bs-toggle="modal" data-bss-tooltip="" class="mx-1" href="#" data-bs-target="#remove" title="Here you can remove the tank."><i class="far fa-trash-alt text-danger" style="font-size: 20px;"></i></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -382,6 +421,41 @@ include_once 'functions/get-data.php';
             </div>
         </div>
     </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="create">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Tank</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div style="margin-top: 5px;"><label class="form-label">Tank</label><input class="form-control" type="text" placeholder="Tank (Name, Brand)" name="name" required="" pattern="^(?!\s).*$"></div>
+                        <div style="margin-top: 5px;"><label class="form-label">Height (cm)</label><input class="form-control" type="text" placeholder="Tank Height" name="item" required="" pattern="^(?!\s).*$"></div>
+                        <div style="margin-top: 5px;"><label class="form-label">Liter</label><input class="form-control" type="text" placeholder="Tank Liter" name="item" required="" pattern="[0-9]+" minlength="11" maxlength="11"></div>
+                    </form>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="update">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Tank</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div style="margin-top: 5px;"><label class="form-label">Tank</label><input class="form-control" type="text" placeholder="Tank (Name, Brand)" name="name" required="" pattern="^(?!\s).*$"></div>
+                        <div style="margin-top: 5px;"><label class="form-label">Height (cm)</label><input class="form-control" type="text" placeholder="Tank Height" name="item" required="" pattern="^(?!\s).*$"></div>
+                        <div style="margin-top: 5px;"><label class="form-label">Liter</label><input class="form-control" type="text" placeholder="Tank Liter" name="item" required="" pattern="[0-9]+" minlength="11" maxlength="11"></div>
+                    </form>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="confirm">
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>

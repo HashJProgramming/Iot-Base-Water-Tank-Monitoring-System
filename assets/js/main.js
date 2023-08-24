@@ -110,7 +110,7 @@ $(document).ready(function() {
                     if (currentTime - lastAlertTime >= 180000) {
                         if (level < 0) {
                             Swal.fire(
-                                'Critical High Water Level!',
+                                'Critical Low Water Level!',
                                 'Please refill your water tank.',
                                 'warning'
                             );
@@ -118,7 +118,7 @@ $(document).ready(function() {
                         } 
                         if (level > 100) {
                             Swal.fire(
-                                'Critical Low Water Level!',
+                                'Critical High Water Level!',
                                 'Please stop filling your water tank.',
                                 'warning'
                             );

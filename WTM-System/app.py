@@ -160,7 +160,6 @@ def index():
 @app.route('/WTMS/start', methods=['GET'])
 def start():
     return jsonify(status='Sensor Started', sensor=monitor())
-
     
 @app.route('/WTMS/restart', methods=['GET'])
 def restart():

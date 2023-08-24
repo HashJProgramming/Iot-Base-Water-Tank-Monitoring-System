@@ -3,6 +3,7 @@ session_start();
 if (isset($_SESSION['username'])){
     header('Location: ./index.php');
 }
+include_once 'functions/get-data.php';
 ?>
 <!DOCTYPE html>
 <html data-bs-theme="light" id="bg-animation" lang="en">
@@ -36,6 +37,19 @@ if (isset($_SESSION['username'])){
                             <div class="col me-2">
                                 <div class="text-uppercase text-danger fw-bold text-xs mb-1"><span>Sensor Status</span></div>
                                 <div class="text-dark fw-bold h5 mb-0"><span class="fs-2 sensor-status">0</span></div>
+                            </div>
+                            <div class="col-auto"><i class="fas fa-cogs fa-2x text-gray-300"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-3 mb-4">
+                <div class="card shadow border-start-warning py-2">
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col me-2">
+                                <div class="text-uppercase text-danger fw-bold text-xs mb-1"><span>Alert</span></div>
+                                <div class="text-dark fw-bold h5 mb-0"><span class="fs-2"><?php echo settings_data()['alerts']?></span></div>
                             </div>
                             <div class="col-auto"><i class="fas fa-cogs fa-2x text-gray-300"></i></div>
                         </div>
