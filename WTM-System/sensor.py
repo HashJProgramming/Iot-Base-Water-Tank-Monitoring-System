@@ -176,7 +176,7 @@ def monitor():
         lcd_string(f"WATER LEVEL:{round(water_percentage)}%", 1)
         lcd_string(f'IP:{get_ip_address()}', 2) 
         update_data(distance_cm, water_percentage, water_liters)
-        if time.localtime().tm_min % 10 == 0 and time.localtime().tm_sec == 0:
+        if time.localtime().tm_min % 10 == 0 and time.localtime().tm_sec <= 2:
             save_data(distance_cm, water_percentage, water_liters)
         time.sleep(1)
 try:
