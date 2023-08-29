@@ -5,3 +5,4 @@ venv
 sensor.log
 WTMS.WTMS-System.code-workspace
 sensor.json
+WTM-System/test.py
