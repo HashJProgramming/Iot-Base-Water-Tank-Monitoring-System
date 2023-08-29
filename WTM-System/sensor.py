@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 import smbus2 as smbus
 import mysql.connector
+import datetime
 import logging
 import socket
 import json
@@ -23,6 +24,7 @@ LCD_BACKLIGHT_ON = 0x08
 LCD_BACKLIGHT_OFF = 0x00
 
 def setup():
+    GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(TRIG, GPIO.OUT)
     GPIO.setup(ECHO, GPIO.IN)
@@ -181,25 +183,30 @@ def update_data(distance, percentage, liters):
 
 
 def monitor():
+    max_distance, min_distance, tank_capacity_liters = set_settings()
     current_time = time.time()
+    current_time2 = time.time()
     while True:
-        max_distance, min_distance, tank_capacity_liters = set_settings()
         distance_cm = distance()
         water_percentage = calculate_percentage(distance_cm, max_distance, min_distance)
         water_liters = calculate_liters(water_percentage, tank_capacity_liters)
         lcd_string(f"WATER LEVEL:{round(water_percentage)}%", 1)
         lcd_string(f'IP:{get_ip_address()}', 2) 
         update_data(distance_cm, water_percentage, water_liters)
-       
-        if time.time() - current_time >= 10 * 60:
+        if time.time() - current_time2 >= 60:
+           print(f"[{datetime.datetime.now()}] - Distance: {distance_cm}cm | Level: {water_percentage}% | Liters: {water_liters}L")
+           logging.debug(f"Distance: {distance_cm}cm | Level: {water_percentage}% | Liters: {water_liters}L")
+           current_time2 = time.time()
+        if time.time() - current_time >= 5 * 60:
             save_data(distance_cm, water_percentage, water_liters)
             current_time = time.time()
-        time.sleep(1.5)
+        time.sleep(1)
         
 try:
     if __name__ == '__main__':
         setup()
         lcd_init()
+        print("WTMS - Sensor Started!")
         monitor()
 except Exception as e:
     logging.error(f"Error running the sensor app: {e}")
