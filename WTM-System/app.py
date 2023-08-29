@@ -10,7 +10,7 @@ import psutil
 app = Flask(__name__)
 CORS(app)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
-
+data_path = '/var/www/html/WTMS/WTM-System/sensor.json'
 
 @app.route('/WTMS/')
 def index():
@@ -54,7 +54,7 @@ def logs():
   
 @app.route('/WTMS/stats', methods=['GET'])
 def stats():
-    with open('/var/www/html/WTMS/WTM-System/sensor.json', 'r') as data_file:
+    with open(data_path, 'r') as data_file:
         sensor_data = json.load(data_file)
         return jsonify(sensor_data)
     

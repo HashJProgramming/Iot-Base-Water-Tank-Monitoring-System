@@ -5,9 +5,10 @@ import socket
 import mysql.connector
 import logging
 import json
-import io
+import os
 
 logging.basicConfig(filename='sensor.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+data_path = '/var/www/html/WTMS/WTM-System/sensor.json'
 
 bus = smbus.SMBus(1)
 TRIG = 4
@@ -155,14 +156,21 @@ def save_data(distance, percentage, liters):
 
 def update_data(distance, percentage, liters):
     try:
-        with open('/var/www/html/WTMS/WTM-System/sensor.json', 'r') as data_file:
-            existing_data = json.load(data_file)
-            existing_data['distance'] = distance
-            existing_data['level'] = percentage
-            existing_data['liters'] = liters
-        
-        with open('/var/www/html/WTMS/WTM-System/sensor.json', 'w') as data_file:
-            json.dump(existing_data, data_file)
+        if os.path.exists(data_path):
+            with open(data_path, 'r') as data_file:
+                content = data_file.read()
+                if content.strip():
+                    existing_data = json.loads(content)
+                else:
+                    existing_data = {}
+        else:
+            existing_data = {}
+        existing_data['distance'] = distance
+        existing_data['level'] = percentage
+        existing_data['liters'] = liters
+
+        with open(data_path, 'w') as data_file:
+            json.dump(existing_data, data_file, indent=4)
     except Exception as e:
         logging.error(f"Error saving data: {e}")
 
@@ -180,11 +188,10 @@ def monitor():
             save_data(distance_cm, water_percentage, water_liters)
         time.sleep(1)
 try:
-    setup()
-    lcd_init()
-    monitor()
-    print("LCD initialized")
-    print("Sensor started")
+    if __name__ == '__main__':
+        setup()
+        lcd_init()
+        monitor()
 except Exception as e:
     logging.error(f"Error running the sensor app: {e}")
  
