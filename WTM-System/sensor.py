@@ -10,8 +10,8 @@ bus = smbus.SMBus(1)
 TRIG = 4
 ECHO = 17
 
-max_distance = 100
-min_distance = 10
+max_distance = 0
+min_distance = 0
 tank_capacity_liters = 0
 
 LCD_ADDR = 0x27
@@ -150,12 +150,12 @@ def save_data(distance, percentage, liters):
 
 def update_data(distance, percentage, liters):
     try:
-        sql = "UPDATE water_data SET distance = %s, level = %s, liters = %s WHERE id = 1"
+        sql = "UPDATE water_stats SET distance = %s, level = %s, liters = %s WHERE id = 1"
         values = (distance, percentage, liters)
         cursor.execute(sql, values)
         db.commit()
     except Exception as e:
-        logging.error(f"Error update data: {e}")
+        logging.error(f"Error saving data: {e}")
 
 
 def monitor():
@@ -165,20 +165,18 @@ def monitor():
         water_percentage = calculate_percentage(distance_cm)
         water_liters = calculate_liters(water_percentage)
         lcd_string(f"WATER LEVEL:{round(water_percentage)}%", 1)
-        lcd_string(f'IP:{get_ip_address()}', 2)
-        # update_data(distance_cm, water_percentage, water_liters) 
+        lcd_string(f'IP:{get_ip_address()}', 2) 
+        update_data(distance_cm, water_percentage, water_liters)
         if time.localtime().tm_min % 10 == 0 and time.localtime().tm_sec == 0:
             save_data(distance_cm, water_percentage, water_liters)
         time.sleep(1)
-        
 try:
     setup()
     lcd_init()
     monitor()
     print("LCD initialized")
     print("Sensor started")
-    
 except Exception as e:
     logging.error(f"Error running the sensor app: {e}")
-
+ 
     

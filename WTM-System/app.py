@@ -5,14 +5,6 @@ import RPi.GPIO as GPIO
 import smbus2 as smbus
 import mysql.connector
 
-db = mysql.connector.connect(
-host="localhost",
-user="root",
-password="hash",
-database="wtms"
-)
-
-
 app = Flask(__name__)
 CORS(app)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -60,23 +52,7 @@ def logs():
   
 @app.route('/WTMS/stats', methods=['GET'])
 def stats():
-    cursor = db.cursor()
-    cursor.execute("SELECT * FROM `water_stats` WHERE `id` = 1")
-    result = cursor.fetchone()
-    
-    settings_query = "SELECT `low_threshold`, `high_threshold` FROM `settings` WHERE `id` = 1"
-    cursor.execute(settings_query)
-    settings = cursor.fetchone()
-
-    response = {
-        'distance': result[1],  
-        'level': result[2],     
-        'liters': result[3],    
-        'low': settings[0],     
-        'high': settings[1],         
-    }
-    cursor.close()
-    return jsonify(response)
+    return jsonify()
  
     
         
