@@ -8,3 +8,58 @@
 2023-08-29 15:54:28,189 - INFO - plugin_name: mysql_native_password
 2023-08-29 15:54:28,199 - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
 2023-08-29 15:54:28,200 - DEBUG - new_auth_plugin: mysql_native_password
+2023-08-29 16:25:30,355 - DEBUG - # _do_auth(): self._auth_plugin: 
+2023-08-29 16:25:30,366 - INFO - package: mysql.connector.plugins
+2023-08-29 16:25:30,367 - INFO - plugin_name: mysql_native_password
+2023-08-29 16:25:30,376 - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2023-08-29 16:25:30,378 - DEBUG - new_auth_plugin: mysql_native_password
+2023-08-29 16:36:05,168 - DEBUG - # _do_auth(): self._auth_plugin: 
+2023-08-29 16:36:05,173 - INFO - package: mysql.connector.plugins
+2023-08-29 16:36:05,174 - INFO - plugin_name: mysql_native_password
+2023-08-29 16:36:05,183 - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2023-08-29 16:36:05,185 - DEBUG - new_auth_plugin: mysql_native_password
+2023-08-29 16:36:41,211 - DEBUG - # _do_auth(): self._auth_plugin: 
+2023-08-29 16:36:41,213 - INFO - package: mysql.connector.plugins
+2023-08-29 16:36:41,214 - INFO - plugin_name: mysql_native_password
+2023-08-29 16:36:41,224 - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2023-08-29 16:36:41,227 - DEBUG - new_auth_plugin: mysql_native_password
+2023-08-29 16:56:41,644 - DEBUG - # _do_auth(): self._auth_plugin: 
+2023-08-29 16:56:41,653 - INFO - package: mysql.connector.plugins
+2023-08-29 16:56:41,654 - INFO - plugin_name: mysql_native_password
+2023-08-29 16:56:41,672 - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2023-08-29 16:56:41,675 - DEBUG - new_auth_plugin: mysql_native_password
+2023-08-29 16:56:41,743 - ERROR - Error calculating percentage: float division by zero
+2023-08-29 16:56:41,744 - ERROR - Error calculating liters: unsupported operand type(s) for /: 'NoneType' and 'int'
+2023-08-29 16:56:41,745 - ERROR - Error running the sensor app: type NoneType doesn't define __round__ method
+2023-08-29 16:56:49,199 - DEBUG - # _do_auth(): self._auth_plugin: 
+2023-08-29 16:56:49,201 - INFO - package: mysql.connector.plugins
+2023-08-29 16:56:49,202 - INFO - plugin_name: mysql_native_password
+2023-08-29 16:56:49,212 - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2023-08-29 16:56:49,213 - DEBUG - new_auth_plugin: mysql_native_password
+2023-08-29 16:56:49,266 - ERROR - Error calculating percentage: float division by zero
+2023-08-29 16:56:49,267 - ERROR - Error calculating liters: unsupported operand type(s) for /: 'NoneType' and 'int'
+2023-08-29 16:56:49,268 - ERROR - Error running the sensor app: type NoneType doesn't define __round__ method
+2023-08-29 16:57:12,712 - DEBUG - # _do_auth(): self._auth_plugin: 
+2023-08-29 16:57:12,714 - INFO - package: mysql.connector.plugins
+2023-08-29 16:57:12,715 - INFO - plugin_name: mysql_native_password
+2023-08-29 16:57:12,725 - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2023-08-29 16:57:12,726 - DEBUG - new_auth_plugin: mysql_native_password
+2023-08-29 16:57:12,779 - ERROR - Error calculating percentage: float division by zero
+2023-08-29 16:57:12,780 - ERROR - Error calculating liters: unsupported operand type(s) for /: 'NoneType' and 'int'
+2023-08-29 16:57:12,780 - ERROR - Error running the sensor app: type NoneType doesn't define __round__ method
+2023-08-29 16:58:06,532 - DEBUG - # _do_auth(): self._auth_plugin: 
+2023-08-29 16:58:06,539 - INFO - package: mysql.connector.plugins
+2023-08-29 16:58:06,540 - INFO - plugin_name: mysql_native_password
+2023-08-29 16:58:06,555 - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2023-08-29 16:58:06,557 - DEBUG - new_auth_plugin: mysql_native_password
+2023-08-29 16:58:06,611 - ERROR - Error calculating percentage: float division by zero
+2023-08-29 16:58:06,613 - ERROR - Error calculating liters: unsupported operand type(s) for /: 'NoneType' and 'int'
+2023-08-29 16:58:06,614 - ERROR - Error running the sensor app: type NoneType doesn't define __round__ method
+2023-08-29 16:58:19,114 - DEBUG - # _do_auth(): self._auth_plugin: 
+2023-08-29 16:58:19,117 - INFO - package: mysql.connector.plugins
+2023-08-29 16:58:19,118 - INFO - plugin_name: mysql_native_password
+2023-08-29 16:58:19,136 - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2023-08-29 16:58:19,138 - DEBUG - new_auth_plugin: mysql_native_password
+2023-08-29 16:58:19,192 - ERROR - Error calculating percentage: float division by zero
+2023-08-29 16:58:19,193 - ERROR - Error calculating liters: unsupported operand type(s) for /: 'NoneType' and 'int'
+2023-08-29 16:58:19,194 - ERROR - Error running the sensor app: type NoneType doesn't define __round__ method

@@ -63,6 +63,16 @@
         )
         ");
 
+        $db->exec("
+          CREATE TABLE IF NOT EXISTS water_stats (
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            distance DOUBLE,
+            level DOUBLE,
+            liters DOUBLE,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+        ");
+
         $db->beginTransaction();
 
         $stmt = $db->prepare("SELECT COUNT(*) FROM `users` WHERE `username` = 'admin'");
@@ -78,6 +88,12 @@
             $stmt = $db->prepare("INSERT INTO `settings` (`high_threshold`, `low_threshold`) VALUES (:high, :low)");
             $stmt->bindValue(':high', 0);
             $stmt->bindValue(':low', 0);
+            $stmt->execute();
+
+            $stmt = $db->prepare("INSERT INTO `water_stats` (`distance`, `level`, `liters`) VALUES (:distance, :level, :liters)");
+            $stmt->bindValue(':distance', 0);
+            $stmt->bindValue(':level', 0);
+            $stmt->bindValue(':liters', 0);
             $stmt->execute();
         }
         

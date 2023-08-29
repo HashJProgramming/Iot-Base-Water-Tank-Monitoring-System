@@ -95,41 +95,5 @@ $(document).ready(function() {
         $(".ampm").html(ampm.toUpperCase());
         },1000);
 
-        var lastAlertTime = 0;
-        setInterval( function() {
-            $.ajax({
-                url: 'functions/water-stats.php',  
-                dataType: 'json',
-                success: function(data) {
-                    $('.water-level').html(data['level'] + "%");
-                    $('.water-liters').html(data['liters'] + "L");
-                    $(".distance").html(data['distance']);
-                    const level = data['level'];
-                    var currentTime = Date.now();
-                   
-                    if (currentTime - lastAlertTime >= 180000) {
-                        if (level < 0) {
-                            Swal.fire(
-                                'Critical Low Water Level!',
-                                'Please refill your water tank.',
-                                'warning'
-                            );
-                            lastAlertTime = currentTime; 
-                        } 
-                        if (level > 100) {
-                            Swal.fire(
-                                'Critical High Water Level!',
-                                'Please stop filling your water tank.',
-                                'warning'
-                            );
-                            lastAlertTime = currentTime;
-                        }
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);
-                }
-            });
-            },1000);
-        
+    
 } );
