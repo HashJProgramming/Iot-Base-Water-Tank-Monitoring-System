@@ -1,0 +1,5 @@
+2023-08-29 15:56:47,114 - DEBUG - # _do_auth(): self._auth_plugin: 
+2023-08-29 15:56:47,115 - INFO - package: mysql.connector.plugins
+2023-08-29 15:56:47,116 - INFO - plugin_name: mysql_native_password
+2023-08-29 15:56:47,129 - INFO - AUTHENTICATION_PLUGIN_CLASS: MySQLNativePasswordAuthPlugin
+2023-08-29 15:56:47,131 - DEBUG - new_auth_plugin: mysql_native_password
