@@ -512,31 +512,19 @@ include_once 'functions/get-table.php';
                     console.error('Error:', error);
                 }
             });
-            },1000);
-        var x = true;
-        setInterval(function() {
-            fetch('http://<?php echo $_SERVER['SERVER_NAME']; ?>:5000/WTMS/check_sensor')
-                .then(response => response.json()) 
-                .then(data => {
-                    $(".sensor-status").html(data.status);
-                    if(data.status == "Running"){
-                        $(".restart-btn").html("Restart");
-                        // console.log(data.status);
-                    }else{
-                        if(x){
-                            fetch('http://<?php echo $_SERVER['SERVER_NAME']; ?>:5000/WTMS/start')
-                            .then(response => response.json()) 
-                            .then(data => {
-                                $(".sensor-status").html(data.status);
-                                console.log(data.message);
-                        })
-                        x = false;
-                        }
-                    }
-                    
-                })
-                .catch(error => console.error('Error:', error));
-        }, 1000);
+            },100);
+
+        fetch('http://<?php echo $_SERVER['SERVER_NAME']; ?>:5000/WTMS/check_sensor')
+        .then(response => response.json()) 
+        .then(data => {
+            $(".sensor-status").html(data.status);
+            if(data.status == "Running"){
+                $(".restart-btn").html("Restart");
+            } else{
+                $(".restart-btn").html("Start");
+            }
+        })
+        .catch(error => console.error('Error:', error));
         
 
         function formatBytes(bytes) {

@@ -1,10 +1,10 @@
-import time
 import RPi.GPIO as GPIO
 import smbus2 as smbus
-import socket
 import mysql.connector
 import logging
+import socket
 import json
+import time
 import os
 
 logging.basicConfig(filename='sensor.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -13,11 +13,6 @@ data_path = '/var/www/html/WTMS/WTM-System/sensor.json'
 bus = smbus.SMBus(1)
 TRIG = 4
 ECHO = 17
-
-max_distance = 0
-min_distance = 0
-tank_capacity_liters = 0
-
 LCD_ADDR = 0x27
 LCD_CHR = 1
 LCD_CMD = 0
@@ -26,14 +21,6 @@ LCD_LINE_1 = 0x80
 LCD_LINE_2 = 0xC0
 LCD_BACKLIGHT_ON = 0x08
 LCD_BACKLIGHT_OFF = 0x00
-
-# HASH'J PROGRAMMING DB GET DATA START
-db = mysql.connector.connect(
-host="localhost",
-user="root",
-password="hash",
-database="wtms"
-)
 
 def setup():
     GPIO.setmode(GPIO.BCM)
@@ -108,7 +95,7 @@ def distance():
         return None
     
 
-def calculate_percentage(distance_cm):
+def calculate_percentage(distance_cm, max_distance, min_distance):
     try:
         percentage = ((max_distance - distance_cm) / (max_distance - min_distance)) * 100
         return round(percentage, 1)
@@ -117,7 +104,7 @@ def calculate_percentage(distance_cm):
         return None
         
 
-def calculate_liters(percentage):
+def calculate_liters(percentage, tank_capacity_liters):
     try:
         # return round((percentage / 100) * tank_capacity_liters, 2)
         return round((percentage / 100) * tank_capacity_liters, 1)
@@ -128,29 +115,47 @@ def calculate_liters(percentage):
 
 def set_settings():
     try:
-        global max_distance, min_distance, tank_capacity_liters
+        db = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="hash",
+            database="wtms"
+        )
         cursor = db.cursor()
+
         sql_settings = "SELECT high_threshold, low_threshold FROM settings WHERE id = 1"
         cursor.execute(sql_settings)
         settings_result = cursor.fetchone()
         if settings_result:
             max_distance, min_distance = settings_result
+
         sql_tank_status = "SELECT liters FROM water_tank WHERE status = 'Activated'"
         cursor.execute(sql_tank_status)
         tank_status_result = cursor.fetchone()
         if tank_status_result:
             tank_capacity_liters = tank_status_result[0]
+            
         cursor.close()
+        db.close() 
+        return max_distance, min_distance, tank_capacity_liters
     except Exception as e:
         logging.error(f"Error set settings: {e}")
 
 def save_data(distance, percentage, liters):
     try:
+        db = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="hash",
+            database="wtms"
+            )
         sql = "INSERT INTO water_data (distance, level, liters) VALUES (%s, %s, %s)"
         values = (distance, percentage, liters)
         cursor = db.cursor()
         cursor.execute(sql, values)
         cursor.close()
+        db.commit()
+        db.close()
     except Exception as e:
         logging.error(f"Error saving data: {e}")
 
@@ -177,19 +182,19 @@ def update_data(distance, percentage, liters):
 
 def monitor():
     current_time = time.time()
-    save_interval = 10 * 60
     while True:
-        set_settings()
+        max_distance, min_distance, tank_capacity_liters = set_settings()
         distance_cm = distance()
-        water_percentage = calculate_percentage(distance_cm)
-        water_liters = calculate_liters(water_percentage)
+        water_percentage = calculate_percentage(distance_cm, max_distance, min_distance)
+        water_liters = calculate_liters(water_percentage, tank_capacity_liters)
         lcd_string(f"WATER LEVEL:{round(water_percentage)}%", 1)
         lcd_string(f'IP:{get_ip_address()}', 2) 
         update_data(distance_cm, water_percentage, water_liters)
         if time.time() - current_time >= 10 * 60:
             save_data(distance_cm, water_percentage, water_liters)
             current_time = time.time()
-        time.sleep(.5)
+        time.sleep(0.5)
+        
 try:
     if __name__ == '__main__':
         setup()
