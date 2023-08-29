@@ -32,7 +32,7 @@ function tank_list(){
 
 function water_data_list(){
     global $db;
-    $sql = 'SELECT * FROM water_data ORDER BY id DESC LIMIT 5000';
+    $sql = 'SELECT * FROM water_data ORDER BY id DESC LIMIT 2000';
     $stmt = $db->prepare($sql);
     $stmt->execute();
     $results = $stmt->fetchAll();
@@ -41,9 +41,9 @@ function water_data_list(){
         ?>
             <tr>
                 <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/reservoir.png"><?php echo $row['id']; ?></td>
-                <td><?php echo $row['level']; ?></td>
-                <td><?php echo $row['liters']; ?></td>
-                <td><?php echo $row['distance']; ?></td>
+                <td><?php echo $row['level']; ?>%</td>
+                <td><?php echo $row['liters']; ?>L</td>
+                <td><?php echo $row['distance']; ?>cm</td>
                 <td><?php echo $row['created_at']; ?></td>
             </tr>
         <?php

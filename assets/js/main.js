@@ -95,5 +95,4 @@ $(document).ready(function() {
         $(".ampm").html(ampm.toUpperCase());
         },1000);
 
-    
 } );

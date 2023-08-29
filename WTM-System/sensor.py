@@ -4,6 +4,8 @@ import smbus2 as smbus
 import socket
 import mysql.connector
 import logging
+import json
+
 logging.basicConfig(filename='sensor.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 bus = smbus.SMBus(1)
@@ -30,7 +32,6 @@ user="root",
 password="hash",
 database="wtms"
 )
-cursor = db.cursor()
 
 def setup():
     GPIO.setmode(GPIO.BCM)
@@ -126,6 +127,7 @@ def calculate_liters(percentage):
 def set_settings():
     try:
         global max_distance, min_distance, tank_capacity_liters
+        cursor = db.cursor()
         sql_settings = "SELECT high_threshold, low_threshold FROM settings WHERE id = 1"
         cursor.execute(sql_settings)
         settings_result = cursor.fetchone()
@@ -136,6 +138,7 @@ def set_settings():
         tank_status_result = cursor.fetchone()
         if tank_status_result:
             tank_capacity_liters = tank_status_result[0]
+        cursor.close()
     except Exception as e:
         logging.error(f"Error set settings: {e}")
 
@@ -143,17 +146,26 @@ def save_data(distance, percentage, liters):
     try:
         sql = "INSERT INTO water_data (distance, level, liters) VALUES (%s, %s, %s)"
         values = (distance, percentage, liters)
+        cursor = db.cursor()
         cursor.execute(sql, values)
-        db.commit()
+        cursor.close()
     except Exception as e:
         logging.error(f"Error saving data: {e}")
 
 def update_data(distance, percentage, liters):
     try:
-        sql = "UPDATE water_stats SET distance = %s, level = %s, liters = %s WHERE id = 1"
-        values = (distance, percentage, liters)
-        cursor.execute(sql, values)
-        db.commit()
+        # Read existing data from the JSON file
+        with open('sensor.json', 'r') as data_file:
+            existing_data = json.load(data_file)
+        
+        # Update the specific fields
+        existing_data['distance'] = distance
+        existing_data['level'] = percentage
+        existing_data['liters'] = liters
+        
+        # Write the updated data back to the JSON file
+        with open('sensor.json', 'w') as data_file:
+            json.dump(existing_data, data_file)
     except Exception as e:
         logging.error(f"Error saving data: {e}")
 

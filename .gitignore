@@ -1,6 +1,7 @@
 .vscode
 WTM System/.vscode
-WTM System/__pycache__
-WTM System/sensor.log
+__pycache__
 venv
+sensor.log
 WTMS.WTMS-System.code-workspace
+sensor.json

@@ -4,6 +4,8 @@ from flask_cors import CORS
 import RPi.GPIO as GPIO
 import smbus2 as smbus
 import mysql.connector
+import json
+import psutil
 
 app = Flask(__name__)
 CORS(app)
@@ -52,8 +54,9 @@ def logs():
   
 @app.route('/WTMS/stats', methods=['GET'])
 def stats():
-    return jsonify()
- 
+    with open('sensor.json', 'r') as data_file:
+        sensor_data = json.load(data_file)
+        return jsonify(sensor_data)
     
         
 if __name__ == '__main__':
