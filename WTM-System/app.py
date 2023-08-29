@@ -54,7 +54,7 @@ def logs():
   
 @app.route('/WTMS/stats', methods=['GET'])
 def stats():
-    with open('sensor.json', 'r') as data_file:
+    with open('/var/www/html/WTMS/WTM-System/sensor.json', 'r') as data_file:
         sensor_data = json.load(data_file)
         return jsonify(sensor_data)
     
