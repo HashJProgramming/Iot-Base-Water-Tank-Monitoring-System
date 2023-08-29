@@ -182,14 +182,15 @@ def update_data(distance, percentage, liters):
 
 def monitor():
     current_time = time.time()
+    max_distance, min_distance, tank_capacity_liters = set_settings()
     while True:
-        max_distance, min_distance, tank_capacity_liters = set_settings()
         distance_cm = distance()
         water_percentage = calculate_percentage(distance_cm, max_distance, min_distance)
         water_liters = calculate_liters(water_percentage, tank_capacity_liters)
         lcd_string(f"WATER LEVEL:{round(water_percentage)}%", 1)
         lcd_string(f'IP:{get_ip_address()}', 2) 
         update_data(distance_cm, water_percentage, water_liters)
+       
         if time.time() - current_time >= 10 * 60:
             save_data(distance_cm, water_percentage, water_liters)
             current_time = time.time()
