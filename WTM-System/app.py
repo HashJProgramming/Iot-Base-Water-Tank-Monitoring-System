@@ -1,9 +1,6 @@
 import time
 from flask import Flask, jsonify
 from flask_cors import CORS
-import RPi.GPIO as GPIO
-import smbus2 as smbus
-import mysql.connector
 import subprocess
 import json
 import psutil
@@ -54,7 +51,7 @@ def get_system_stats():
 
 @app.route('/WTMS/logs', methods=['GET'])
 def logs():
-    with open('sensor.log', 'r') as log_file:
+    with open('/var/www/html/WTMS/WTM-System/sensor.log', 'r') as log_file:
             log_contents = log_file.read()
     return jsonify(status='200', message=log_contents)
   
