@@ -193,7 +193,7 @@ def monitor():
         if time.time() - current_time >= 10 * 60:
             save_data(distance_cm, water_percentage, water_liters)
             current_time = time.time()
-        time.sleep(0.5)
+        time.sleep(1.5)
         
 try:
     if __name__ == '__main__':

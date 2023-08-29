@@ -4,8 +4,10 @@ from flask_cors import CORS
 import RPi.GPIO as GPIO
 import smbus2 as smbus
 import mysql.connector
+import subprocess
 import json
 import psutil
+import shlex
 
 app = Flask(__name__)
 CORS(app)
@@ -22,8 +24,13 @@ def start():
     
 @app.route('/WTMS/restart', methods=['GET'])
 def restart():
-    time.sleep(1)
-    return jsonify(status='200', message='Sensor Restarted')
+    try:
+        command = 'sudo systemctl restart wtms_sensor_app.service'
+        subprocess.run(shlex.split(command), check=True)
+        time.sleep(1)
+        return jsonify(status='200', message='Sensor Restarted')
+    except subprocess.CalledProcessError as e:
+        return jsonify(status='500', message=f'Failed to restart sensor: {e}')
 
 @app.route('/WTMS/check_sensor', methods=['GET'])
 def check_sensor():
