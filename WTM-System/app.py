@@ -67,7 +67,7 @@ def stats():
     
 @app.route('/WTMS/clear', methods=['GET'])
 def clear_log():
-    with open('sensor.log', 'w') as log_file:
+    with open('/var/www/html/WTMS/WTM-System/sensor.log', 'w') as log_file:
         pass    
     return jsonify(status='200', message='Log Cleared')
 

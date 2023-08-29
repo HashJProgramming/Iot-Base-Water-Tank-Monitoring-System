@@ -8,10 +8,16 @@ import json
 import time
 import os
 
-logging.basicConfig(filename='sensor.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='/var/www/html/WTMS/WTM-System/sensor.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 data_path = '/var/www/html/WTMS/WTM-System/sensor.json'
-
 bus = smbus.SMBus(1)
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="hash",
+    database="wtms"
+)
+        
 TRIG = 4
 ECHO = 17
 LCD_ADDR = 0x27
@@ -117,14 +123,7 @@ def calculate_liters(percentage, tank_capacity_liters):
 
 def set_settings():
     try:
-        db = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="hash",
-            database="wtms"
-        )
         cursor = db.cursor()
-
         sql_settings = "SELECT high_threshold, low_threshold FROM settings WHERE id = 1"
         cursor.execute(sql_settings)
         settings_result = cursor.fetchone()
@@ -136,28 +135,19 @@ def set_settings():
         tank_status_result = cursor.fetchone()
         if tank_status_result:
             tank_capacity_liters = tank_status_result[0]
-            
         cursor.close()
-        db.close() 
         return max_distance, min_distance, tank_capacity_liters
     except Exception as e:
         logging.error(f"Error set settings: {e}")
 
 def save_data(distance, percentage, liters):
     try:
-        db = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="hash",
-            database="wtms"
-            )
         sql = "INSERT INTO water_data (distance, level, liters) VALUES (%s, %s, %s)"
         values = (distance, percentage, liters)
         cursor = db.cursor()
         cursor.execute(sql, values)
         cursor.close()
         db.commit()
-        db.close()
     except Exception as e:
         logging.error(f"Error saving data: {e}")
 
@@ -183,22 +173,19 @@ def update_data(distance, percentage, liters):
 
 
 def monitor():
-    max_distance, min_distance, tank_capacity_liters = set_settings()
     current_time = time.time()
-    current_time2 = time.time()
     while True:
         distance_cm = distance()
+        max_distance, min_distance, tank_capacity_liters = set_settings()
         water_percentage = calculate_percentage(distance_cm, max_distance, min_distance)
         water_liters = calculate_liters(water_percentage, tank_capacity_liters)
         lcd_string(f"WATER LEVEL:{round(water_percentage)}%", 1)
         lcd_string(f'IP:{get_ip_address()}', 2) 
         update_data(distance_cm, water_percentage, water_liters)
-        if time.time() - current_time2 >= 60:
-           print(f"[{datetime.datetime.now()}] - Distance: {distance_cm}cm | Level: {water_percentage}% | Liters: {water_liters}L")
-           logging.debug(f"Distance: {distance_cm}cm | Level: {water_percentage}% | Liters: {water_liters}L")
-           current_time2 = time.time()
-        if time.time() - current_time >= 5 * 60:
+        if time.time() - current_time >= 10 * 60:
             save_data(distance_cm, water_percentage, water_liters)
+            print(f"[{datetime.datetime.now()}] - Distance: {distance_cm}cm | Level: {water_percentage}% | Liters: {water_liters}L")
+            logging.debug(f"Distance: {distance_cm}cm | Level: {water_percentage}% | Liters: {water_liters}L")
             current_time = time.time()
         time.sleep(1)
         
