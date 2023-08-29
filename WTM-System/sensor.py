@@ -5,6 +5,7 @@ import socket
 import mysql.connector
 import logging
 import json
+import io
 
 logging.basicConfig(filename='sensor.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -154,17 +155,14 @@ def save_data(distance, percentage, liters):
 
 def update_data(distance, percentage, liters):
     try:
-        # Read existing data from the JSON file
-        with open('sensor.json', 'r') as data_file:
+        with open('/var/www/html/WTMS/WTM-System/sensor.json', 'r') as data_file:
             existing_data = json.load(data_file)
-        
-        # Update the specific fields
+            
         existing_data['distance'] = distance
         existing_data['level'] = percentage
         existing_data['liters'] = liters
         
-        # Write the updated data back to the JSON file
-        with open('sensor.json', 'w') as data_file:
+        with open('/var/www/html/WTMS/WTM-System/sensor.json', 'w') as data_file:
             json.dump(existing_data, data_file)
     except Exception as e:
         logging.error(f"Error saving data: {e}")
