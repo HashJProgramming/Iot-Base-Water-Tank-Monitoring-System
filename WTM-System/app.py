@@ -58,6 +58,11 @@ def stats():
         sensor_data = json.load(data_file)
         return jsonify(sensor_data)
     
-        
+@app.route('/WTMS/clear', methods=['GET'])
+def clear_log():
+    with open('sensor.log', 'w') as log_file:
+        pass    
+    return jsonify(status='200', message='Log Cleared')
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

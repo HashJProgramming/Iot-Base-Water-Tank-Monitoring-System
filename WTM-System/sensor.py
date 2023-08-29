@@ -157,10 +157,9 @@ def update_data(distance, percentage, liters):
     try:
         with open('/var/www/html/WTMS/WTM-System/sensor.json', 'r') as data_file:
             existing_data = json.load(data_file)
-            
-        existing_data['distance'] = distance
-        existing_data['level'] = percentage
-        existing_data['liters'] = liters
+            existing_data['distance'] = distance
+            existing_data['level'] = percentage
+            existing_data['liters'] = liters
         
         with open('/var/www/html/WTMS/WTM-System/sensor.json', 'w') as data_file:
             json.dump(existing_data, data_file)
