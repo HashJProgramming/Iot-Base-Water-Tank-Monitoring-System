@@ -8,8 +8,8 @@ import json
 import time
 import os
 
-logging.basicConfig(filename='/var/www/html/WTMS/WTM-System/sensor.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-data_path = '/var/www/html/WTMS/WTM-System/sensor.json'
+logging.basicConfig(filename='/home/hash/Desktop/WTMS/WTM-System/sensor.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+data_path = '/home/hash/Desktop/WTMS/WTM-System/sensor.json'
 bus = smbus.SMBus(1)
 db = mysql.connector.connect(
     host="localhost",
@@ -123,6 +123,7 @@ def calculate_liters(percentage, tank_capacity_liters):
 
 def set_settings():
     try:
+        tank_capacity_liters = None
         cursor = db.cursor()
         sql_settings = "SELECT high_threshold, low_threshold FROM settings WHERE id = 1"
         cursor.execute(sql_settings)

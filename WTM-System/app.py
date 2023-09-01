@@ -9,17 +9,17 @@ import shlex
 app = Flask(__name__)
 CORS(app)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
-data_path = '/var/www/html/WTMS/WTM-System/sensor.json'
-
-@app.route('/WTMS/')
+data_path = '/home/hash/Desktop/WTMS/WTM-System/sensor.json'
+logs_path = '/home/hash/Desktop/WTMS/WTM-System/sensor.log'
+@app.route('/wtms/api/')
 def index():
     return jsonify({"distance": "none"})  
 
-@app.route('/WTMS/start', methods=['GET'])
+@app.route('/wtms/api/start', methods=['GET'])
 def start():
     return jsonify(status='Sensor Started')
     
-@app.route('/WTMS/restart', methods=['GET'])
+@app.route('/wtms/api/restart', methods=['GET'])
 def restart():
     try:
         command = 'sudo systemctl restart wtms_sensor_app.service'
@@ -29,11 +29,11 @@ def restart():
     except subprocess.CalledProcessError as e:
         return jsonify(status='500', message=f'Failed to restart sensor: {e}')
 
-@app.route('/WTMS/check_sensor', methods=['GET'])
+@app.route('/wtms/api/check_sensor', methods=['GET'])
 def check_sensor():
     return jsonify(status='Running')
   
-@app.route('/WTMS/get_system_stats')
+@app.route('/wtms/api/get_system_stats')
 def get_system_stats():
     cpu_percent = psutil.cpu_percent()
     memory_info = psutil.virtual_memory()
@@ -49,22 +49,22 @@ def get_system_stats():
         'disk_percent': disk_usage.percent,
     }
 
-@app.route('/WTMS/logs', methods=['GET'])
+@app.route('/wtms/api/logs', methods=['GET'])
 def logs():
-    with open('/var/www/html/WTMS/WTM-System/sensor.log', 'r') as log_file:
+    with open(logs_path, 'r') as log_file:
             log_contents = log_file.read()
     return jsonify(status='200', message=log_contents)
   
   
-@app.route('/WTMS/stats', methods=['GET'])
+@app.route('/wtms/api/stats', methods=['GET'])
 def stats():
     with open(data_path, 'r') as data_file:
         sensor_data = json.load(data_file)
         return jsonify(sensor_data)
     
-@app.route('/WTMS/clear', methods=['GET'])
+@app.route('/wtms/api/clear', methods=['GET'])
 def clear_log():
-    with open('/var/www/html/WTMS/WTM-System/sensor.log', 'w') as log_file:
+    with open('/var/www/html/wtms/api/WTM-System/sensor.log', 'w') as log_file:
         pass    
     return jsonify(status='200', message='Log Cleared')
 
