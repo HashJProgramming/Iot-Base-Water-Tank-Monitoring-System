@@ -22,7 +22,7 @@ def start():
 @app.route('/wtms/api/restart', methods=['GET'])
 def restart():
     try:
-        command = 'sudo systemctl restart wtms_sensor_app.service'
+        command = 'sudo systemctl restart WTMS_sensor.service'
         subprocess.run(shlex.split(command), check=True)
         time.sleep(1)
         return jsonify(status='200', message='Sensor Restarted')
@@ -64,7 +64,7 @@ def stats():
     
 @app.route('/wtms/api/clear', methods=['GET'])
 def clear_log():
-    with open('/var/www/html/wtms/api/WTM-System/sensor.log', 'w') as log_file:
+    with open(logs_path, 'w') as log_file:
         pass    
     return jsonify(status='200', message='Log Cleared')
 

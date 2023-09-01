@@ -123,7 +123,6 @@ def calculate_liters(percentage, tank_capacity_liters):
 
 def set_settings():
     try:
-        tank_capacity_liters = None
         cursor = db.cursor()
         sql_settings = "SELECT high_threshold, low_threshold FROM settings WHERE id = 1"
         cursor.execute(sql_settings)

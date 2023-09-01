@@ -131,7 +131,7 @@ $(document).ready(function() {
                 console.error('Error:', error);
             }
         });
-        },100);
+        },1500);
 
     fetch('api/check_sensor')
     .then(response => response.json()) 
