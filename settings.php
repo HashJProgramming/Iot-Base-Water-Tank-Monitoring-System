@@ -498,7 +498,7 @@ include_once 'functions/get-table.php';
                     $(".memory-usage").html(formatBytes(data.memory_used) + " / " + formatBytes(data.memory_total));
                 })
                 .catch(error => console.error('Error:', error));
-        }, 1000);
+        }, 5000);
     
         document.getElementById('restarts').addEventListener('click', function() {
             fetch('api/restart')

@@ -7,7 +7,7 @@ include_once 'functions/authentication.php';
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>RMMFB</title>
+    <title>WTMS</title>
     <meta name="description" content="Rental Management and Monitoring for a Fashion Boutique">
     <link rel="icon" type="image/png" sizes="128x128" href="assets/img/reservoir.png">
     <link rel="icon" type="image/png" sizes="128x128" href="assets/img/reservoir.png">

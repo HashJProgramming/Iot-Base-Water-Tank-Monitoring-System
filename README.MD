@@ -3,6 +3,36 @@
 <h3 align="left">Languages and Tools:</h3>
 <p align="left"> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://www.linux.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="40" height="40"/> </a> <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a> <a href="https://www.nginx.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nginx/nginx-original.svg" alt="nginx" width="40" height="40"/> </a> <a href="https://www.php.net" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" alt="php" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> </p>
 
+## Software & Hardware Requirements
+
+| Software                                  | Hardware                                                      |
+|-------------------------------------------|---------------------------------------------------------------|
+| Raspbery Pi OS 64bit                      | Raspberry Pi 3 B+                                             |
+| PHP Version 7.4.33                        | USB CardReader                                                |
+| MySQL Version 10.5.19                     | DC to DC MicroUSB Buck-Converter 6-24V to 5V 3A               |
+| nginx Version 1.18.0                      | Heatsink                                                      |
+| phpMyAdmin Version 5.0.4                  | Ultrasonic Sensor  HC-SR04                                    |
+| Python Version 3.9                        | Printed Circuit Boards                                        |
+|   - blinker Version 1.6.2                 | Jumper Wires Male to Male                                     |
+|   - click Version 8.1.7                   | Jumper Wires Male to female                                   |
+|   - flask Version 2.3.3                   | ALITOVE 12V 5A 60W                                            |
+|   - Flask-Cors Version 4.0.0              | MicroUSB                                                      |
+|   - importlib-metadata Version 6.8.0      | Resistor 470 OHMS                                             |
+|   - itsdangerous Version 2.1.2            | Risistor 330 OHMS                                             |
+|   - Jinja2 Version 3.1.2                  | SDCard 16GB or Higher                                         |
+|   - MarkupSafe Version 2.1.3              | 16x2 LCD Display White on Blue                                |
+|   - mysql-connector-python Version 8.1.0  | PowerBank                                                     |
+|   - protobuf Version 4.21.12              | YX850 Power FailureAutomatic SwitchingStandby Battery         |
+|   - psutil Version 5.9.5                  | IP65 Enclosure 240x160x92mm ABS                               |
+|   - RPi.GPIO Version 0.7.1                | Power Switch                                                  |
+|   - smbus2 Version 0.4.2                  | Digital voltmeter display                                     |
+|   - werkzeug Version 2.3.7                | 24AWG Tinned Copper Stranded Hook up Wire                     |
+|   - zipp Version 3.16.2                   | CPU Fan                                                       |
+
+ 
+ 
+ 
+ 
 ## Installation
 ```
 Linux:
@@ -139,4 +169,30 @@ Other:
 sudo systemctl status WTMS_api.service
 sudo systemctl stop WTMS_api.service
 sudo systemctl restart WTMS_api.service
+```
+
+##  LICENSE
+```
+Copyright (c) 2023 Joshua Ambalong
+
+Permission is NOT granted to any person to obtain a copy of this software and
+associated documentation files (the "Software"), and it is prohibited to:
+
+    - Commercial Use: The Software may not be used for any commercial purposes.
+    - Modification: No modifications or derivative works of the Software are allowed.
+    - Distribution: The distribution of the Software to others is strictly prohibited.
+    - Private Use: Even private or personal usage of the Software is not allowed.
+
+This license explicitly restricts any use, modification, distribution, or private usage of the Software.
+
+For inquiries about licensing options, please contact the author at JoshuaMarceloAmbalong@gmail.com.
+
+THE SOFTWARE IS PROVIDED "AS IS," WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM,
+OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+SOFTWARE.
+
 ```
