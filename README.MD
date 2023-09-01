@@ -35,7 +35,7 @@
  
  
 ## Installation
-```bash
+```shell
 Linux:
 sudo apt update
 sudo apt install nginx
@@ -46,7 +46,8 @@ sudo apt install phpmyadmin
 
 ls -l /etc/nginx/conf.d/phpmyadmin.conf
 sudo nano /etc/nginx/sites-available/default
-
+sudo nginx -t
+sudo systemctl reload nginx
 
 Git Clone:
 git clone https://github.com/HashJProgramming/WTMS
