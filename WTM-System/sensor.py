@@ -174,9 +174,9 @@ def update_data(distance, percentage, liters):
 
 def monitor():
     current_time = time.time()
+    max_distance, min_distance, tank_capacity_liters = set_settings()
     while True:
         distance_cm = distance()
-        max_distance, min_distance, tank_capacity_liters = set_settings()
         water_percentage = calculate_percentage(distance_cm, max_distance, min_distance)
         water_liters = calculate_liters(water_percentage, tank_capacity_liters)
         lcd_string(f"WATER LEVEL:{round(water_percentage)}%", 1)
@@ -188,11 +188,18 @@ def monitor():
             logging.debug(f"Distance: {distance_cm}cm | Level: {water_percentage}% | Liters: {water_liters}L")
             current_time = time.time()
         time.sleep(1)
-        
+
+def clear():
+    try:
+        with open(data_path, 'w') as json_file:
+            json.dump({}, json_file)
+    except Exception as e:
+        logging.error(f'Error Dumping json file: {e}')
 try:
     if __name__ == '__main__':
         setup()
         lcd_init()
+        clear()
         print("WTMS - Sensor Started!")
         monitor()
 except Exception as e:

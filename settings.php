@@ -238,7 +238,7 @@ include_once 'functions/get-table.php';
                         <div class="card-body">
                             <form class="text-primary" method="post" action="functions/save_settings.php">
                                 <div class="my-1 mb-4"><label class="form-label">Water level high threshold (cm)</label><input class="form-range" type="range" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can adjust the water level alert threshold" name="high" onchange="rangehigh(this.value)" value="<?php echo settings_data()['high']?>" min="<?php echo settings_data()['low']?>" max="<?php echo max_distance()['height']?>"></div>
-                                <div class="my-1 mb-4"><label class="form-label">Water level low threshold (cm)</label><input class="form-range" type="range" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can adjust the water level alert threshold" name="low" onchange="rangelow(this.value)" value="<?php echo settings_data()['low']?>"></div>
+                                <div class="my-1 mb-4"><label class="form-label">Water level low threshold (cm)</label><input class="form-range" type="range" data-bs-toggle="tooltip" data-bss-tooltip="" title="Here you can adjust the water level alert threshold" name="low" onchange="rangelow(this.value)" value="<?php echo settings_data()['low']?>" max="<?php echo max_distance()['height']?>"></div>
                                 <div class="text-center my-1"><button class="btn btn-primary" type="submit">Save</button></div>
                             </form>
                         </div>
